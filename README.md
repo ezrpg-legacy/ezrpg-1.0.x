@@ -20,8 +20,7 @@ Need some help? Check out the [ezRPG Forums](http://www.ezrpgproject.net/)
 2. Give read/write permission to:
   * config.php
   * smarty/templates_c
-3. Visit install.php in your browser and follow the instructions.
-4. Delete install.php, login to your game!
+3. Visit yourgame.com/path/to/ezrpg/install in your browser and follow the instructions.
 
 ## License
 
