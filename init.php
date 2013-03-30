@@ -9,11 +9,6 @@ session_start();
 //header("Cache-Control: no-cache, must-revalidate"); // HTTP/1.1
 //header("Expires: Mon, 26 Jul 1997 05:00:00 GMT"); // Date in the past
 
-require_once 'config.php';
-
-//Show errors?
-(SHOW_ERRORS == 0)?error_reporting(0):error_reporting(E_ALL);
-
 //Constants
 define('CUR_DIR', realpath(dirname(__FILE__)));
 define('MOD_DIR', CUR_DIR . '/modules');
@@ -21,6 +16,11 @@ define('ADMIN_DIR', CUR_DIR . '/admin');
 define('LIB_DIR', CUR_DIR . '/lib');
 define('EXT_DIR', LIB_DIR . '/ext');
 define('HOOKS_DIR', CUR_DIR . '/hooks');
+
+require_once CUR_DIR . '/config.php';
+
+//Show errors?
+(SHOW_ERRORS == 0)?error_reporting(0):error_reporting(E_ALL);
 
 require_once(CUR_DIR . '/lib.php');
 
