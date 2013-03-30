@@ -11,7 +11,7 @@ class ModuleFactory
     /*
       Function: factory
       A factory class for creating module objects.
-      Includes the file /module/$module/index.php then creates a new instance of the class Module_$module.
+      Includes the file /modules/$module/index.php then creates a new instance of the class Module_$module.
       
       *Example*: index.php?module=Index
       
