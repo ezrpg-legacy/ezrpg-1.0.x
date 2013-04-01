@@ -1,6 +1,11 @@
 <?php
 define('IN_EZRPG', true);
 
+if (!file_exists('./config.php')) {
+  header('Location: install/index.php');
+	exit(1);
+}
+
 require_once 'init.php';
 
 $default_mod = 'Index';
