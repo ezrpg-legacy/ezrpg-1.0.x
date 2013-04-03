@@ -1,7 +1,7 @@
 </div>
 
 <div id="footer">
-	ezRPG Game Engine 2010, <a href="http://www.ezrpgproject.com/"><strong>ezRPG Project</strong></a>
+	ezRPG Game Engine 2013, <a href="http://www.ezrpgproject.net/"><strong>ezRPG Project</strong></a>
 </div>
 
 </div>
