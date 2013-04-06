@@ -474,5 +474,44 @@ class Db_mysql
             return true;
         }
     }
+    
+    /*
+      Function: update
+      Updates a row based on where clause
+	
+      Parameters:
+      $table - Database Table
+      $fields - Array containing Col and Val
+      $where - Where Clause
+      	
+      Usuage:
+      $fields['money'] = $this->player->money + 100;
+      $fields['exp'] = $this->player->exp + 25;
+      $fields['kills'] = $this->player->kills + 1;
+      $this->db->update('<ezrpg>players', $fields, "ID = '" . $this->player->id . "'");
+      
+      Considerations:
+      Possible a 4th Argument: WhereCol and WhereVal
+      This would allow you to preform functions on the value itself.
+      Also it could allow for a default column to be select (perhaps player->id?)
+      */
+    function update($table, $fields, $where)
+	{
+		if ($this->isConnected === false)
+            $this->connect();
+
+		$i = 0;
+		$var = "";
+		$numFields = count($fields);
+		foreach ($fields as $key => $val){
+			if(++$i === $numFields)
+			$var .= $key . "='".$val ."'";
+			else
+			$var .= $key . "='".$val ."', ";
+		}
+		$table = str_replace('<ezrpg>', $this->prefix, $table);
+		$sql = "Update ". mysql_real_escape_string($table, $this->db) ." SET ". $var ." WHERE " . $where;
+		return $this->execute($sql);
+	}
 }
 ?>
