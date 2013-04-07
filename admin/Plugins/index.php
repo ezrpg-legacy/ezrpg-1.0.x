@@ -32,7 +32,7 @@ class Admin_Plugins extends Base_Module
 					break;
 			}
 		} else {
-		$this->install_ask();
+		$this->list_modules();
 		}
     }
     
@@ -42,6 +42,7 @@ class Admin_Plugins extends Base_Module
 		while ($m = $this->db->fetch($query)) {
 			$plugins[] = $m;
 		}
+		$this->install_ask();
 		$this->tpl->assign("plugins", $plugins);
 		$this->tpl->display('admin/plugins.tpl');
 	}
@@ -115,7 +116,7 @@ class Admin_Plugins extends Base_Module
 			`xml_location` text NOT NULL,
 			UNIQUE KEY id (id)
 			) ENGINE=InnoDB  DEFAULT CHARSET=utf8;");
-			
+
 			$query = $this->db->execute('select * from ' . DB_PREFIX . 'plugins where `id` =1');
 			$res = Array();
 		while ($m = $this->db->fetch($query)) {
@@ -134,8 +135,12 @@ class Admin_Plugins extends Base_Module
 		$this->tpl->display('admin/plugin_results.tpl');
 	}
   private function install_ask() {
-    $this->tpl->assign('INSTALLED', FALSE);
-    $this->tpl->display('admin/plugins.tpl');
+	$result = $this->db->fetchRow('SELECT COUNT(id) AS count FROM <ezrpg>plugins');
+	if($result){
+	$this->tpl->assign('INSTALLED', TRUE);
+    }else{
+	$this->tpl->assign('INSTALLED', FALSE);
+	}
   }
 
 	private function rrmdir($dir) { 
