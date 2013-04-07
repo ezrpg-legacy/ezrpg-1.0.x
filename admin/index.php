@@ -1,5 +1,6 @@
 <?php
 define('IN_EZRPG', true);
+define('IN_ADMIN', true);
 
 require_once '../init.php';
 
