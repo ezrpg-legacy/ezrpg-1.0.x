@@ -13,7 +13,7 @@ function hook_menu_players($db, $tpl, $player, $args = 0) {
 	$menu .= "<li><a href='index.php'>Home</a></li>";
 	$menu .= "<li><a href='index.php?mod=Register'>Register</a></li>";
 	$menu .= "</ul>";
-  $tpl->assign('TOP_MENU_LOGGEDOUT', $menu);
+  $tpl->assign('MENU_LOGGEDOUT', $menu);
 	} else {
 	/*
 	$menu = "<ul>";
@@ -34,7 +34,7 @@ function hook_menu_players($db, $tpl, $player, $args = 0) {
 	$menu .= "<li><a href='".$vl->uri."'>".$vl->title."</a></li>";
 	}// End of ForEach
 	$menu .= "</ul>";//End of Menu's List
-	$tpl->assign('TOP_MENU_'. $val->title, $menu); //Assign a Short Code for Template by the Group's Title
+	$tpl->assign('MENU_'. $val->title, $menu); //Assign a Short Code for Template by the Group's Title
 	}// End of Group's ForEach
 	}
 	return $args;
@@ -46,7 +46,7 @@ function hook_menu_admin(&$db, &$tpl, &$player, $args = 0) {
 	$menu .= "<li><a href='../index.php'>Back</a></li>";
 	$menu .= "<li><a href='../index.php?mod=Logout'>Log Out</a></li>";
 	$menu .= "</ul>";
-	$tpl->assign('TOP_ADMIN_MENU', $menu);
+	$tpl->assign('ADMIN_MENU', $menu);
 	return $args;
 }
 ?>
