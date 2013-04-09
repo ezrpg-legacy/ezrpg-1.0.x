@@ -78,7 +78,9 @@ INSERT INTO `ez1_menu` (`id`, `parent_id`, `title`, `uri`) VALUES
 (3, 1, 'EventLog', 'index.php?mod=EventLog'),
 (4, 1, 'City', 'index.php?mod=City'),
 (5, 4, 'Bank', 'index.php?mod=Bank'),
-(6, 1, 'Account', 'index.php?mod=AccountSettings');
+(6, 1, 'Account', 'index.php?mod=AccountSettings'),
+(7, NULL, 'WorldMenu', ''),
+(8, 7, 'Members', 'index.php?mod=Members');
 QUERY;
 
 	$db->execute($query4);
