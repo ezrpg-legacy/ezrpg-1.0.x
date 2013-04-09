@@ -2,7 +2,7 @@
 defined('IN_EZRPG') or exit;
 
 if (defined('IN_ADMIN'))
-  $hooks->add_hook('admin', 'menu_admin');
+  $hooks->add_hook('admin_header', 'menu_admin');
 else
 	$hooks->add_hook('player', 'menu_players');
 
@@ -39,7 +39,7 @@ function hook_menu_players($db, $tpl, $player, $args = 0) {
 	}
 	return $args;
 }
-function hook_menu_admin(&$db, $config, &$tpl, &$player, $args = 0) {
+function hook_menu_admin(&$db, &$tpl, &$player, $args = 0) {
 	$menu = "<ul>";
 	$menu .= "<li><a href='index.php'>Admin</a></li>";
 	$menu .= "<li><a href='index.php?mod=Members'>Members</a></li>";
