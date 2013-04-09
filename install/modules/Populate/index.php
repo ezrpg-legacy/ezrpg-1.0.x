@@ -64,6 +64,7 @@ QUERY;
 CREATE TABLE IF NOT EXISTS `ez1_menu` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `parent_id` int(11) DEFAULT NULL,
+  `name` varchar(255) NOT NULL,
   `title` varchar(255) NOT NULL,
   `uri` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
@@ -73,14 +74,13 @@ QUERY;
 	
 	$query4 = <<<QUERY
 INSERT INTO `ez1_menu` (`id`, `parent_id`, `title`, `uri`) VALUES
-(1, NULL, 'UserMenu', ''),
-(2, 1, 'Home', 'index.php'),
-(3, 1, 'EventLog', 'index.php?mod=EventLog'),
-(4, 1, 'City', 'index.php?mod=City'),
-(5, 4, 'Bank', 'index.php?mod=Bank'),
-(6, 1, 'Account', 'index.php?mod=AccountSettings'),
-(7, NULL, 'WorldMenu', ''),
-(8, 7, 'Members', 'index.php?mod=Members');
+(1, NULL, 'UserMenu', 'User Menu', ''),
+(2, 1, 'Home', 'Home', 'index.php'),
+(3, 1, 'EventLog', 'Event Log', 'index.php?mod=EventLog'),
+(4, 1, 'City', 'City', 'index.php?mod=City'),
+(6, 1, 'Account', 'Account', 'index.php?mod=AccountSettings'),
+(7, NULL, 'WorldMenu', 'World Menu', ''),
+(8, 7, 'Members', 'Members', 'index.php?mod=Members');
 QUERY;
 
 	$db->execute($query4);
