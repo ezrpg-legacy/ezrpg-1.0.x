@@ -25,6 +25,11 @@ p {
 	padding: 5px;
 }
 
+ul{
+list-style-type:none;
+padding:5px;
+}
+
 label {
 	display: block;
 	margin-top: 5px;
