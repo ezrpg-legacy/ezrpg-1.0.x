@@ -58,8 +58,31 @@ CREATE TABLE IF NOT EXISTS `<ezrpg>player_log` (
   KEY `new_logs` (`player`,`status`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 QUERY;
-		$db->execute($query2);
-		$this->header();
+	$db->execute($query2);
+	
+	$query3 = <<<QUERY
+CREATE TABLE IF NOT EXISTS `ez1_menu` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `parent_id` int(11) DEFAULT NULL,
+  `title` varchar(255) NOT NULL,
+  `uri` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
+QUERY;
+	$db->execute($query3);
+	
+	$query4 = <<<QUERY
+INSERT INTO `ez1_menu` (`id`, `parent_id`, `title`, `uri`) VALUES
+(1, NULL, 'UserMenu', ''),
+(2, 1, 'Home', 'index.php'),
+(3, 1, 'EventLog', 'index.php?mod=EventLog'),
+(4, 1, 'City', 'index.php?mod=City'),
+(5, 4, 'Bank', 'index.php?mod=Bank'),
+(6, 1, 'Account Settings', 'index.php?mod=AccountSettings');
+QUERY;
+
+	$db->execute($query4);
+	$this->header();
 		echo "<h2>The database has been populated.</h2>\n";
 		echo "<a href=\"index.php?step=CreateAdmin\">Continue to next step</a>";
 		$this->footer();
