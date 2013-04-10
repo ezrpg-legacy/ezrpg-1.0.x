@@ -10,6 +10,7 @@ require_once (LIB_DIR . '/func.rand.php');
 require_once (LIB_DIR . '/func.text.php');
 require_once (LIB_DIR . '/func.player.php');
 require_once (LIB_DIR . '/func.validate.php');
+require_once (LIB_DIR . '/func.menu.php');
 
 //Classes
 require_once (LIB_DIR . '/class.dbfactory.php');
