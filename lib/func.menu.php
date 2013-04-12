@@ -134,7 +134,7 @@ function get_menu_children($id, &$db){
 		$item['name'] = $name;
 		$item['title'] = $title;
 		$item['uri'] = $uri;
-		return $db->insert("<ezrpg>menu", $item);
+		return $db->insert("menu", $item);
 	}
 	
 /*
