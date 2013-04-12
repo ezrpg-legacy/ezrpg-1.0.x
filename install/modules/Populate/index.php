@@ -78,9 +78,12 @@ INSERT INTO `<ezrpg>menu` (`id`, `parent_id`, `name`, `title`, `uri`) VALUES
 (2, 1, 'Home', 'Home', 'index.php'),
 (3, 1, 'EventLog', 'Event Log', 'index.php?mod=EventLog'),
 (4, 1, 'City', 'City', 'index.php?mod=City'),
+(5, 1, 'Members', 'Members', 'index.php?mod=Members'),
 (6, 1, 'Account', 'Account', 'index.php?mod=AccountSettings'),
 (7, NULL, 'WorldMenu', 'World Menu', ''),
-(8, 7, 'Members', 'Members', 'index.php?mod=Members');
+(8, 7, 'Members', 'Members', 'index.php?mod=Members'),
+(9, NULL, 'AdminMenu', 'Admin Menu', ''),
+(10, 9, 'Members', 'Members', 'index.php?mod=Members');
 QUERY;
 
 	$db->execute($query4);
