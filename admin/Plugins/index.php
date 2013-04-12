@@ -78,7 +78,7 @@ class Admin_Plugins extends Base_Module
 						$this->db->execute("insert into ". DB_PREFIX ."plugins (title, description, author, authorsite, active, version, xml_location) values ('".$p_m['n']."', '".$p_m['d']."', '".$p_m['a']."', '".$p_m['s']."', 0, '".$p_m['v']."', 'modules/". pathinfo($_FILES['file']['name'], PATHINFO_FILENAME) .".xml')");
 						$results .= "installed db data <br />";
 						$this->re_copy($dir, CUR_DIR);
-						rename(CUR_DIR . "/" .pathinfo($_FILES['file']['name'], PATHINFO_FILENAME) .".xml", MOD_DIR ."/" .pathinfo($_FILES['file']['name'], PATHINFO_FILENAME) .".xml");
+						rename(CUR_DIR . "/" .pathinfo($_FILES['file']['name'], PATHINFO_FILENAME) .".xml", MOD_DIR ."/".pathinfo($_FILES['file']['name'], PATHINFO_FILENAME). "/" .pathinfo($_FILES['file']['name'], PATHINFO_FILENAME) .".xml");
 						$this->rrmdir($dir);
 						$results .= "You have successfully uploaded a plugin via the manager! <br />";
 						$results .= "<a href='index.php?mod=Plugins'><input name='login' type='submit' class='button' value='Back To Manager' /></a> OR <a href='../". $p_m['i'] ."'><input name='login' type='submit' class='button' value='Install Plugin' /></a>";
@@ -140,7 +140,15 @@ class Admin_Plugins extends Base_Module
 	$this->tpl->assign('INSTALLED', FALSE);
 	}
   }
-
+ private function remove_modules(){
+		$data = "This feature still isn't compelte.<br />";
+		$data .= "The road map for this feature is as follows:<br />";
+		$data .= "<b>FIRST</b><br />Delete files only as they appear from the .xml file.<br />";
+		$data .= "By recursively checking through the xml's FileName scope, we can delete files installed based on loc/name<br />";
+		$data .= "<b>Secondly</b><br />Only after the initial feature is created, we'll start a md5 check on the files.<br />";
+		$data .= "Any files matching the md5 are auto deleted, md5 mismatches are declared with a warning, and user interaction is needed<br />";
+		$data .= "<a href='index.php?mod=Plugins'><input name='login' type='submit' class='button' value='Back To Manager' /></a>";
+  }
 	private function rrmdir($dir) { 
 		if (is_dir($dir)) { 
 			$objects = scandir($dir); 
