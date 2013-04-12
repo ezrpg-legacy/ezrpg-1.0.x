@@ -150,7 +150,7 @@ function get_menu_children($id, &$db){
 	
 	function get_menu_beginnings($begin, $menu = ""){
 	$menu .= "<ul>"; //Start HTML list
-	if($begin == TRUE){$menu .= "<li><a href='index.php'>".(defined('IN_ADMIN')? "ADMIN" : "Home")."</a></li>";}
+	if($begin == TRUE){$menu .= "<li><a href='index.php'>".(defined('IN_ADMIN')? "Admin" : "Home")."</a></li>";}
 	return $menu;
 	}
 	
