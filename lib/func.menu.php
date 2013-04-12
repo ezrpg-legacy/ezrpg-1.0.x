@@ -21,80 +21,65 @@ defined('IN_EZRPG') or exit;
 
 
 */
-function get_menus(&$db, &$tpl, $menuname = "")
+function get_menus(&$db, &$tpl, $menuname = NULL, $pos = NULL, $begin = TRUE, $endings = TRUE)
 {
-if($menuname == "")
-{
-   if(LOGGED_IN != "TRUE") 
-	{
-	$menu = "<ul>";
-	$menu .= "<li><a href='index.php'>Home</a></li>";
-	$menu .= "<li><a href='index.php?mod=Register'>Register</a></li>";
-	$menu .= "</ul>";
-  $tpl->assign('TOP_MENU_LOGGEDOUT', $menu);
-	} else {
-	$query = $db->execute('SELECT * FROM `<ezrpg>menu` WHERE parent_id IS NULL');
-	$result = $db->fetchAll($query);
-	$menu = "";
-	foreach ($result as $row => $val)
-	{
-		$menutag = "TOP_MENU_$val->name";
-		$query = $db->execute('SELECT * FROM `<ezrpg>menu` WHERE parent_id = '. $val->id);
-		$result = $db->fetchAll($query);
-		$menu .= "<ul>"; //Start HTML list
-		foreach($result as $row => $val)
-			{
-				$menu .= "<li><a href='".$val->uri."'>".$val->title."</a>";
-				$query = $db->execute('SELECT COUNT(id) AS count FROM `<ezrpg>menu` WHERE parent_id = '. $val->id);
-				$result = $db->fetchAll($query);
-				if($result){ 
-					$menu .= get_menu_children($val->id, $db); 
-				} else {
-					$menu .= '';
-				}
-				$menu .= "</li>";
-			}// End of ForEach
-		$menu .= "</ul>";//End of Menu's List
-		$tpl->assign($menutag, $menu); //Assign a Short Code for Template by the Group's Title		
-	}// End of Group's ForEach
+if(!isset($menuname))
+	$pos = "TOP_";
 	
-	}
-}else{
-if(LOGGED_IN != "TRUE") 
-	{
-	$menu = "<ul>";
-	$menu .= "<li><a href='index.php'>Home</a></li>";
-	$menu .= "<li><a href='index.php?mod=Register'>Register</a></li>";
-	$menu .= "</ul>";
-  $tpl->assign('TOP_MENU_LOGGEDOUT', $menu);
-	} else {
-	$query = $db->execute('SELECT * FROM `<ezrpg>menu` WHERE name = "'. $menuname. '"');
-	$result = $db->fetchAll($query);
-	$menu = "";
-	foreach ($result as $row => $val)
-	{
-		$menutag = "TOP_MENU_$val->name";
-		$query = $db->execute('SELECT * FROM `<ezrpg>menu` WHERE parent_id = '. $val->id);
-		$result = $db->fetchAll($query);
-		$menu .= get_menu_beginnings(); //Start HTML list
-		get_menu_beginnings();
-		foreach($result as $row => $val)
-			{
-				$menu .= "<li><a href='".$val->uri."'>".$val->title."</a>";
-				$query = $db->execute('SELECT COUNT(id) AS count FROM `<ezrpg>menu` WHERE parent_id = '. $val->id);
-				$result = $db->fetchAll($query);
-				if($result){ 
-					$menu .= get_menu_children($val->id, $db); 
-				} else {
-					$menu .= '';
-				}
-				$menu .= "</li>";
-			}// End of ForEach
-		$menu .= get_menu_endings();//End of Menu's List
-		$tpl->assign($menutag, $menu); //Assign a Short Code for Template by the Group's Title		
-	}// End of Group's ForEach
 	
-	}
+	if(LOGGED_IN != "TRUE") 
+	{
+		$menu = "<ul>";
+		$menu .= "<li><a href='index.php'>Home</a></li>";
+		$menu .= "<li><a href='index.php?mod=Register'>Register</a></li>";
+		$menu .= "</ul>";
+		$tpl->assign('TOP_MENU_LOGGEDOUT', $menu);
+	} 
+	else 
+	{
+		if(!isset($menuname))
+		{
+			$query = $db->execute('SELECT * FROM `<ezrpg>menu` WHERE parent_id IS NULL');
+		}
+		else
+		{
+			$query = $db->execute('SELECT * FROM `<ezrpg>menu` WHERE name = "'. $menuname. '"');
+		}
+		$result = $db->fetchAll($query);
+		foreach ($result as $row => $val)
+		{
+			$menu = "";
+			$q1 = $db->execute('SELECT COUNT(*) as count FROM `<ezrpg>menu` WHERE parent_id = '. $val->id);
+			$r1 = $db->fetch($q1);
+			$menu .= get_menu_beginnings($begin); //Start HTML list
+			if($r1->count <> 0)
+			{
+				$query2 = $db->execute('SELECT * FROM `<ezrpg>menu` WHERE parent_id = '. $val->id);
+				$result2 = $db->fetchAll($query2);
+				foreach($result2 as $row2 => $val2)
+					{
+						$menu .= "<li><a href='".$val2->uri."'>".$val2->title."</a>";
+							//This Section Checks for Children//
+							$q2 = $db->execute('SELECT COUNT(*) as count FROM `<ezrpg>menu` WHERE parent_id = '. $val2->id);
+							$result = $db->fetch($q2);
+							if ($result->count != '0')
+							{ 
+							$menu .= get_menu_children($val2->id, $db); 
+							} else {
+								$menu .= '';
+							}
+							//End Of Children Check//
+						$menu .= "</li>";
+					}// End of ForEach
+			} 
+			else
+			{
+			$menu .= "";
+			}
+		$menu .= get_menu_endings($endings);//End of Menu's List	
+		$menutag = $pos. "MENU_". $val->name;
+		$tpl->assign($menutag, $menu); //Assign a Short Code for Template by the Group's Title	
+		}// End of Group's ForEach
 	}
 
 	return TRUE;
@@ -118,8 +103,8 @@ function get_menu_children($id, &$db){
 			{
 				$menu .= "<li><a href='".$val->uri."'>".$val->title."</a>";
 				$query = $db->execute('SELECT COUNT(id) AS count FROM `<ezrpg>menu` WHERE parent_id = '. $val->id);
-				$result = $db->fetchAll($query);
-				$menu .= ($result ? get_menu_children($val->id, $db) : '') . "</li>";
+				$result = $db->fetch($query);
+				$menu .= (($result->count <> 0) ? get_menu_children($val->id, $db) : '') . "</li>";
 			}// End of ForEach
 		$menu .= "</ul>";//End of Menu's List
 		return $menu;
@@ -163,17 +148,21 @@ function get_menu_children($id, &$db){
   Only used in $get_menus
 */
 	
-	function get_menu_beginnings($menu = ""){
+	function get_menu_beginnings($begin, $menu = ""){
 	$menu .= "<ul>"; //Start HTML list
-	$menu .= "<li><a href='index.php'>".(defined('IN_ADMIN')? "ADMIN" : "Home")."</a></li>";
+	if($begin == TRUE){$menu .= "<li><a href='index.php'>".(defined('IN_ADMIN')? "ADMIN" : "Home")."</a></li>";}
 	return $menu;
 	}
-	function get_menu_endings($menu = "", $pre = ""){
+	
+	function get_menu_endings($end, $menu = "", $pre = ""){
 	if (defined('IN_ADMIN')){
 	$pre = "../";
 	$menu .= "<li><a href='../index.php'>To Game</a></li>";
 	}
+	if($end == TRUE){
+	$menu .= "<li><a href='admin/'>Admin</a></li>";
 	$menu .= "<li><a href='".$pre."index.php?mod=" . (LOGGED_IN == 'TRUE' ? 'Logout' : 'Register'). "'>" .(LOGGED_IN == 'TRUE' ? 'Logout' : 'Register'). "</a></li>";
+	}
 	$menu .= "</ul>";
 	return $menu;
 	}
