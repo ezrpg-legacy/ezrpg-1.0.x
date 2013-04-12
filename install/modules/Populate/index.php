@@ -11,7 +11,7 @@ class Install_Populate extends InstallerFactory
 		{
 			$e->__toString();
 		}
-		
+
 		$query1 = <<<QUERY
 CREATE TABLE IF NOT EXISTS `<ezrpg>players` (
   `id` int(11) unsigned NOT NULL auto_increment,
@@ -59,7 +59,7 @@ CREATE TABLE IF NOT EXISTS `<ezrpg>player_log` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 QUERY;
 	$db->execute($query2);
-	
+
 	$query3 = <<<QUERY
 CREATE TABLE IF NOT EXISTS `<ezrpg>menu` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -71,9 +71,9 @@ CREATE TABLE IF NOT EXISTS `<ezrpg>menu` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
 QUERY;
 	$db->execute($query3);
-	
+
 	$query4 = <<<QUERY
-INSERT INTO `<ezrpg>menu` (`id`, `parent_id`, `title`, `uri`) VALUES
+INSERT INTO `<ezrpg>menu` (`id`, `parent_id`, `name`, `title`, `uri`) VALUES
 (1, NULL, 'UserMenu', 'User Menu', ''),
 (2, 1, 'Home', 'Home', 'index.php'),
 (3, 1, 'EventLog', 'Event Log', 'index.php?mod=EventLog'),
