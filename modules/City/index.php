@@ -16,7 +16,11 @@ class Module_City extends Base_Module
     {
         //Require the user to be logged in
         requireLogin();
-		
+		$db = $this->db;
+		$tpl = $this->tpl;
+		get_menus($db, $tpl, "UserMenu");
+		get_menus($db, $tpl, "WorldMenu", NULL, FALSE, FALSE);
+		get_menus($db, $tpl, "City", NULL, False, FALSE);
         $this->tpl->display('city.tpl');
     }
 }
