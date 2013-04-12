@@ -61,7 +61,7 @@ QUERY;
 	$db->execute($query2);
 	
 	$query3 = <<<QUERY
-CREATE TABLE IF NOT EXISTS `ez1_menu` (
+CREATE TABLE IF NOT EXISTS `<ezrpg>menu` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `parent_id` int(11) DEFAULT NULL,
   `name` varchar(255) NOT NULL,
@@ -73,7 +73,7 @@ QUERY;
 	$db->execute($query3);
 	
 	$query4 = <<<QUERY
-INSERT INTO `ez1_menu` (`id`, `parent_id`, `title`, `uri`) VALUES
+INSERT INTO `<ezrpg>menu` (`id`, `parent_id`, `title`, `uri`) VALUES
 (1, NULL, 'UserMenu', 'User Menu', ''),
 (2, 1, 'Home', 'Home', 'index.php'),
 (3, 1, 'EventLog', 'Event Log', 'index.php?mod=EventLog'),
