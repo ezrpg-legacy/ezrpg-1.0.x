@@ -80,7 +80,7 @@ class Admin_Plugins extends Base_Module
 						$this->re_copy($dir, CUR_DIR);
 						rename(CUR_DIR . "/" .pathinfo($_FILES['file']['name'], PATHINFO_FILENAME) .".xml", MOD_DIR ."/" .pathinfo($_FILES['file']['name'], PATHINFO_FILENAME) .".xml");
 						$this->rrmdir($dir);
-						$results .= "You have successfully installed a plugin via the manager! <br />";
+						$results .= "You have successfully uploaded a plugin via the manager! <br />";
 						$results .= "<a href='index.php?mod=Plugins'><input name='login' type='submit' class='button' value='Back To Manager' /></a> OR <a href='../". $p_m['i'] ."'><input name='login' type='submit' class='button' value='Install Plugin' /></a>";
 					}else{
 					    $results .= $dir ."/". pathinfo($_FILES['file']['name'], PATHINFO_FILENAME) .".xml was not found <br />";
@@ -90,10 +90,8 @@ class Admin_Plugins extends Base_Module
 						$results .= "<a href='index.php?mod=Plugins'><input name='login' type='submit' class='button' value='Back To Manager' /></a>";
 					}
 				} else {
-				$results = "Upload: " . $_FILES["file"]["name"] . "<br>";
-				$results .= "Type: " . $_FILES["file"]["type"] . "<br>";
-				$results .= "Size: " . ($_FILES["file"]["size"] / 1024) . " kB<br>";
-				$results .= "Stored in: " . $_FILES["file"]["tmp_name"];
+					$results = "Uploaded Unsupported filetype. Only upload .zips at this time.<br>";
+					$results .= "<a href='index.php?mod=Plugins'><input name='login' type='submit' class='button' value='Back To Manager' /></a>"; 
 				}
 				$this->tpl->assign("RESULTS", $results);
 				$this->tpl->display('plugin_results.tpl');
