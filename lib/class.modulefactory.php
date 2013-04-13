@@ -66,18 +66,18 @@ class ModuleFactory
       > $admin_module = ModuleFactory::adminFactory($db, $tpl, $player);
       > $admin_module->start();
     */
-    public static function adminFactory(&$db, &$tpl, &$player, $module='Index')
+    public static function adminFactory(&$db, &$tpl, &$player, $module='Index', &$menu)
     {
         if (file_exists (ADMIN_DIR . '/' . $module . '/index.php'))
         {
             include_once (ADMIN_DIR . '/' . $module . '/index.php');
             $classname = 'Admin_' . $module;
-            return new $classname($db, $tpl, $player);
+            return new $classname($db, $tpl, $player, $menu);
         }
         else
         {
             include_once (ADMIN_DIR . '/Index/index.php');
-            return new Admin_Index($db, $tpl, $player);
+            return new Admin_Index($db, $tpl, $player, $menu);
         }
     }
 }
