@@ -31,19 +31,19 @@ class ModuleFactory
       > $new_module = ModuleFactory::factory($db, $tpl, $player);
       > $new_module->start();
     */
-    public static function factory(&$db, &$tpl, &$player, $module='Index')
+    public static function factory(&$db, &$tpl, &$player, $module='Index', &$menu)
     {
         if (file_exists(MOD_DIR . '/' . $module . '/index.php'))
         {
             include_once (MOD_DIR . '/' . $module . '/index.php');
             $classname = 'Module_' . $module;
-            return new $classname($db, $tpl, $player);
+            return new $classname($db, $tpl, $player, $menu);
         }
         else
         {
             // Default module to display (the home page)
             include_once (MOD_DIR . '/Index/index.php');
-            return new Module_Index($db, $tpl, $player);
+            return new Module_Index($db, $tpl, $player, $menu);
         }
     }
     
