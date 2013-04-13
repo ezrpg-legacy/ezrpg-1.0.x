@@ -76,5 +76,5 @@ $player = $hooks->run_hooks('player', 0);
 
 //Create the Menu object
 $menu = new Menu($db, $tpl, $player);
-$menu->get_menus($db, $tpl, ((defined('IN_ADMIN'))?'AdminMenu':'UserMenu'),"TOP_");
+$menu->get_menus();
 ?>
