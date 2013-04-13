@@ -94,7 +94,7 @@ class Admin_Plugins extends Base_Module
 					$results .= "<a href='index.php?mod=Plugins'><input name='login' type='submit' class='button' value='Back To Manager' /></a>"; 
 				}
 				$this->tpl->assign("RESULTS", $results);
-				$this->tpl->display('plugin_results.tpl');
+				$this->tpl->display('admin/plugin_results.tpl');
 			}
 		} else {
 		$this->tpl->display('admin/upload_plugins.tpl');
