@@ -1,7 +1,7 @@
 <?php
 // This file cannot be viewed, it must be included
-if (!defined('IN_EZRPG'))
-    exit;
+defined('IN_EZRPG') or exit;
+
 /*
   Class: mysqli
   Database abstraction class for MySQLi.
@@ -11,12 +11,12 @@ if (!defined('IN_EZRPG'))
   - <DbException>
  */
 
-class mysqli_adapter {
+class Db_mysqli 
+{
     /*
       Integer: $query_count
       Keeps track of number of queries made in this database connection.
      */
-
     public $query_count = 0;
 
     /*
@@ -55,12 +55,7 @@ class mysqli_adapter {
     protected $username;
     protected $password;
 
-    /*
-      String: $prefix
-      Contains the table prefix used on the database.
-     */
-    public $prefix;
-
+    
     /*
       Constructor: __construct
       Saves the connection data for later use. Does not start a connection yet.
@@ -71,21 +66,20 @@ class mysqli_adapter {
       $password - Password to login with
       $dbname - Name of database
      */
-
-    public function __construct($config) {
-        $this->host     = $config['server'];
-        $this->dbname   = $config['database'];
-        $this->username = $config['username'];
-        $this->password = $config['password'];
-        $this->prefix   = $config['prefix'];
+    public function __construct($host='localhost', $username='root', $password='', $dbname='') 
+	{
+        $this->host = $host;
+        $this->dbname = $dbname;
+        $this->username = $username;
+        $this->password = $password;
     }
 
     /*
       Destructor: __destruct
       Closes the connection to the MySQL server.
      */
-
-    public function __destruct() {
+    public function __destruct() 
+	{
         if ($this->isConnected)
             $this->db->close();
     }
@@ -112,17 +106,19 @@ class mysqli_adapter {
       See Also:
       - <connect>
      */
-
-    public function execute($query, $params = 0) {
+    public function execute($query, $params = 0) 
+	{
         if ($this->isConnected === false)
             $this->connect();
 
-        try {
+        try 
+		{
             //SQL queries should query for tables with <ezrpg>tablename so that <ezrpg> is replaced with the table prefix.
-            $query = str_replace('<ezrpg>', $this->prefix, $query);
+            $query = str_replace('<ezrpg>', DB_PREFIX, $query);
 
             //Parameter binding
-            if ($params != 0) {
+            if ($params != 0) 
+			{
                 //Split the query
                 $parts = explode('?', $query);
 
@@ -132,34 +128,43 @@ class mysqli_adapter {
                 if ($count1 <= $count2) //Too many parameters, drop the extras
                     $params = array_slice($params, 0, $count1);
 
-                if ($count1 > ($count2 + 1)) { //Too little parameters, add extra '?' symbols //OR throw an SQL exception?
+                if ($count1 > ($count2 + 1)) //Too little parameters, add extra '?' symbols  
+				{ //OR throw an SQL exception?
                     $diff = $count2 - $count1;
                     array_fill($params, $diff, '?');
                 }
 
                 //Sanitize parameters
-                for ($i = 0; $i < $count2; $i++) {
+                for ($i = 0; $i < $count2; $i++) 
+				{
                     $val = $params[$i];
 
-                    if (is_string($val)) {
+                    if (is_string($val)) 
+					{
                         //magic quotes
-                        if (get_magic_quotes_gpc()) {
+                        if (get_magic_quotes_gpc())
+						{
                             $val = stripslashes($val);
                         }
 
                         //Below conditional has been commented out to enforce types
                         //If a string was passed that was meant to be an integer, you must cast it to an int with intval() first.
                         //Otherwise, strings of numbers will still be passed as a string, and surrounded with single quotes
-                        //if (!ctype_digit($val))
+                        
+						//if (!ctype_digit($val))
                         //{
                         $val = '\'' . $this->db->real_escape_string($val) . '\'';
                         //} //Otherwise the string is acting as a digit, so leave it alone
-                    } else if (is_int($val) || is_float($val)) {
+                    } 
+					else if (is_int($val) || is_float($val))
+					{
                         //Value is an integer, no sanitation is necessary.
                         //Only need to convert to string so the parameter can be concatenated onto the query string.
                         //(Not really necessary, but otherwise this block would be empty ;])
                         $val = strval($val);
-                    } else {
+                    } 
+					else 
+					{
                         //Parameter is not a valid type.
                         $val = '?';
                         //OR throw an SQL exception?
@@ -170,7 +175,8 @@ class mysqli_adapter {
 
                 $query = '';
                 //Reconstruct query
-                for ($i = 0; $i < $count2; $i++) {
+                for ($i = 0; $i < $count2; $i++) 
+				{
                     $query .= $parts[$i] . $params[$i];
                 }
                 $query .= $parts[($count1 - 1)];
@@ -183,11 +189,13 @@ class mysqli_adapter {
 
             //Execute query
             $result = $this->db->query($query);
-            if ($result === false) { //If there was an error with the query
+            if ($result === false) 
+			{ //If there was an error with the query
                 $this->error = $this->db->error;
 
                 //If in debug mode, send exception, otherwise ignore
-                if (SHOW_ERRORS === 1) {
+                if (SHOW_ERRORS === 1) 
+				{
                     //Feature: admin logging of errors?
                     $error_msg = '<strong>Query:</strong> <em>' . $this->query . '</em><br /><strong>' . $this->error . '</strong>';
                     throw new DbException($error_msg, SQL_ERROR);
@@ -195,7 +203,9 @@ class mysqli_adapter {
 
                 return false;
             }
-        } catch (SQLException $e) {
+        } 
+		catch (SQLException $e) 
+		{
             $e->__toString();
         }
 
@@ -225,7 +235,8 @@ class mysqli_adapter {
       - <fetchRow>
      */
 
-    public function fetch(&$result) {
+    public function fetch(&$result) 
+	{
         return $result->fetch_object();
     }
 
@@ -428,10 +439,12 @@ class mysqli_adapter {
       Throws a <DbException> if there was a connection problem.
      */
 
-    protected function connect() {
-        if ($this->isConnected === false) {
+    protected function connect() 
+	{
+        if ($this->isConnected === false) 
+		{
             // Persistance is key
-            $this->db = mysqli_connect('p:' . $this->host, $this->username, $this->password);
+            $this->db = mysqli_connect($this->host, $this->username, $this->password);
             if ($this->db === false) {
                 throw new DbException($this->db, SERVER_ERROR);
             } else {
