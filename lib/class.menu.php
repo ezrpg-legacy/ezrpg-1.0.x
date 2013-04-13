@@ -1,10 +1,9 @@
 <?php
-defined( 'IN_EZRPG' ) or exit;
+defined('IN_EZRPG') or exit;
 
 /*
 Class: Menu
 A class to handle the menu system
-TODO: Ease the load on the db
 */
 class Menu
 {
@@ -41,12 +40,13 @@ class Menu
     $tpl - A smarty object.
     $player - A player result set from the database, or 0 if not logged in.
     */
-    public function __construct( &$db, &$tpl, &$player = 0 )
+    public function __construct(&$db, &$tpl, &$player = 0)
     {
         $this->db =& $db;
         $this->tpl =& $tpl;
         $this->player =& $player;
-        $this->menu = array( );
+        $query      = $this->db->execute('SELECT * FROM `<ezrpg>menu`');
+        $this->menu = $db->fetchAll($query);
     }
     
     /*
@@ -68,13 +68,13 @@ class Menu
     $add_menu ($bid, $db, 'Deposit', 'Deposit Money', 'index.php?mod=Bank&act=Deposit');
     */
     
-    function add_menu( $pid = NULL, &$db, $name, $title, $uri = '' )
+    function add_menu($pid = NULL, &$db, $name, $title, $uri = '')
     {
-        $item[ 'parent_id' ] = $pid;
-        $item[ 'name' ]      = $name;
-        $item[ 'title' ]     = $title;
-        $item[ 'uri' ]       = $uri;
-        return $db->insert( "menu", $item );
+        $item['parent_id'] = $pid;
+        $item['name']      = $name;
+        $item['title']     = $title;
+        $item['uri']       = $uri;
+        return $db->insert("menu", $item);
     }
     
     /*
@@ -82,91 +82,87 @@ class Menu
     Preforms the inital grab of the Parent menus.
     
     Parameters:
-    &$db (Mandatory) Opens the function up to the Database class.
-    &$tpl (Mandatory) Opens the function up to accessing the Smarty Template class.
-	$menuname (Optional) Is the name that coincides with the 'Name' field in <ezrpg>menu.
-	$pos (Optional) Used as the prefix for the Smarty Tag.
+    $parent (Optional): Sets the ParentID, if Null then it's a Group, if a string then finds ID
 	$begin (BOOLEAN Optional) Determines if we should auto-include a Home menu item.
-	$endings (BOOLEAN Optional) Determines if we should auto-include a Logout menu item.
-    
-    
+    $endings (BOOLEAN Optional) Determines if we should auto-include a Logout menu item.
+    $menu (Optional) Initializes the $menu array variable    
     */
-    function get_menus( &$db, &$tpl, $menuname = NULL, $pos = NULL, $begin = TRUE, $endings = TRUE )
+    
+    function get_menus($parent = NULL, $begin = TRUE, $endings = TRUE, $menu = 0)
     {
-        if ( is_null ( $menuname ) ) 
-            $pos = "TOP_";
-        
-        
-        if ( LOGGED_IN != "TRUE" ) {
+        if ($menu == 0) {
+            $menu = $this->menu;
+        }
+        if (LOGGED_IN != "TRUE") {
             $menu = "<ul>";
             $menu .= "<li><a href='index.php'>Home</a></li>";
             $menu .= "<li><a href='index.php?mod=Register'>Register</a></li>";
             $menu .= "</ul>";
-            $tpl->assign( 'TOP_MENU_LOGGEDOUT', $menu );
+            $this->tpl->assign('TOP_MENU_LOGGEDOUT', $menu);
         } else {
-            if ( !isset( $menuname ) ) {
-                $query = $db->execute( 'SELECT * FROM `<ezrpg>menu` WHERE parent_id IS NULL' );
-            } else {
-                $query = $db->execute( 'SELECT * FROM `<ezrpg>menu` WHERE name = "' . $menuname . '"' );
-            }
-            $result = $db->fetchAll( $query );
-            foreach ( $result as $row => $val ) {
-                $menu = "";
-                $q1   = $db->execute( 'SELECT COUNT(*) as count FROM `<ezrpg>menu` WHERE parent_id = ' . $val->id );
-                $r1   = $db->fetch( $q1 );
-                $menu .= $this->get_menu_beginnings( $begin ); //Start HTML list
-                if ( $r1->count <> 0 ) {
-                    $query2  = $db->execute( 'SELECT * FROM `<ezrpg>menu` WHERE parent_id = ' . $val->id );
-                    $result2 = $db->fetchAll( $query2 );
-                    foreach ( $result2 as $row2 => $val2 ) {
-                        $menu .= "<li><a href='" . $val2->uri . "'>" . $val2->title . "</a>";
-                        //This Section Checks for Children//
-                        $q2     = $db->execute( 'SELECT COUNT(*) as count FROM `<ezrpg>menu` WHERE parent_id = ' . $val2->id );
-                        $result = $db->fetch( $q2 );
-                        if ( $result->count != '0' ) {
-                            $menu .= $this->get_menu_children( $val2->id, $db );
-                        } else {
-                            $menu .= '';
+            foreach ($menu as $item => $ival) {
+                $result = ($begin ? $this->get_menu_beginnings() : "<ul>");
+                if ($parent != null || !is_null($ival->parent_id)) {
+                    if (!is_numeric($parent)) {
+                        if ($ival->name == $parent) {
+                            $result .= $this->get_children($ival->id);
+                            $result .= ($endings ? $this->get_menu_endings() : "</ul>");
+                            $this->tpl->assign('MENU_' . $ival->name, $result);
                         }
-                        //End Of Children Check//
-                        $menu .= "</li>";
-                    } // End of ForEach
+                    } else {
+                        $result .= $this->get_children($ival->id);
+                        $result .= ($endings ? $this->get_menu_endings() : "</ul>");
+                        $this->tpl->assign('MENU_' . $ival->name, $result);
+                    }
                 } else {
-                    $menu .= "";
+                    if (is_null($ival->parent_id)) //it's a group
+                        {
+                        $result .= $this->get_children($ival->id);
+                        $result .= ($endings ? $this->get_menu_endings() : "</ul>");
+                        $this->tpl->assign('TOP_MENU_' . $ival->name, $result);
+                    }
                 }
-                $menu .= $this->get_menu_endings( $endings ); //End of Menu's List	
-                $menutag = $pos . "MENU_" . $val->name;
-                $tpl->assign( $menutag, $menu ); //Assign a Short Code for Template by the Group's Title	
-            } // End of Group's ForEach
+            }
         }
-        
-        return TRUE;
+        $result .= "</ul>";
+        return $result;
     }
     
-    /*
-    Function: get_menu_children
-    Preforms a recursive check of menus for submenus.
+	/*
+	Function: Get_Children
+	Gets the submenus of a Menu's Parent_ID
     
-    Parameters:
-    $id (Mandatory) Represents the Parent ID of the Menu you're searching
-    &$db (Mandatory) Opens the function up to the Database class.
-    
-    */
-    
-    function get_menu_children( $id, &$db )
+	Parameters:
+	$parent (Optional): Sets the ParentID, if Null then it's a Group
+	$menu (Optional): Initializes the use of the $menu array variable
+	*/
+	
+    function get_children($parent = NULL, $menu = 0)
     {
-        $query  = $db->execute( 'SELECT * FROM `<ezrpg>menu` WHERE parent_id = ' . $id );
-        $result = $db->fetchAll( $query );
-        $menu   = "<ul>"; //Start HTML list
-        foreach ( $result as $row => $val ) {
-            $menu .= "<li><a href='" . $val->uri . "'>" . $val->title . "</a>";
-            $query  = $db->execute( 'SELECT COUNT(id) AS count FROM `<ezrpg>menu` WHERE parent_id = ' . $val->id );
-            $result = $db->fetch( $query );
-            $menu .= ( ( $result->count <> 0 ) ? get_menu_children( $val->id, $db ) : '' ) . "</li>";
-        } // End of ForEach
-        $menu .= "</ul>"; //End of Menu's List
-        return $menu;
+        $result = "";
+        if ($menu == 0) {
+            $menu = $this->menu;
+        }
+        foreach ($menu as $item => $ival) {
+            if (!is_numeric($parent)) {
+                if ($ival->name == $parent) {
+                    get_children($ival->id);
+                    break;
+                }
+            } else {
+                if ($ival->parent_id == $parent) {
+                    $result .= "<li><a href='" . $ival->uri . "'>" . $ival->title . "</a>";
+                    /*if ( $this->has_children($rows, $ival->id))
+                    {
+                    $result.= $this->get_children ( $ival->id, $menu);
+                    }*/
+                    $result .= "</li>";
+                }
+            }
+        }
+        return $result;
     }
+    
     /*
     Function: add_menu_beginnings and add_menu_endings
     Sets up the start and end of the menu.
@@ -178,28 +174,24 @@ class Menu
     Only used in $get_menus
     */
     
-    function get_menu_beginnings( $begin, $menu = "" )
+    function get_menu_beginnings($menu = "")
     {
         $menu .= "<ul>"; //Start HTML list
-        if ( $begin == TRUE ) {
-            $menu .= "<li><a href='index.php'>" . ( defined( 'IN_ADMIN' ) ? "Admin" : "Home" ) . "</a></li>";
-        }
+        $menu .= "<li><a href='index.php'>" . (defined('IN_ADMIN') ? "Admin" : "Home") . "</a></li>";
         return $menu;
     }
     
-    function get_menu_endings( $end, $menu = "", $pre = "" )
+    function get_menu_endings($menu = "", $pre = "")
     {
-        if ( $end == TRUE ) {
-            if ( defined( 'IN_ADMIN' ) ) {
-                $pre = "../";
-                $menu .= "<li><a href='../index.php'>To Game</a></li>";
-            } else {
-                if ( $this->player->rank > 5 ) {
-                    $menu .= "<li><a href='admin/'>Admin</a></li>";
-                }
+        if (defined('IN_ADMIN')) {
+            $pre = "../";
+            $menu .= "<li><a href='../index.php'>To Game</a></li>";
+        } else {
+            if ($this->player->rank > 5) {
+                $menu .= "<li><a href='admin/'>Admin</a></li>";
             }
-            $menu .= "<li><a href='" . $pre . "index.php?mod=" . ( LOGGED_IN == 'TRUE' ? 'Logout' : 'Register' ) . "'>" . ( LOGGED_IN == 'TRUE' ? 'Logout' : 'Register' ) . "</a></li>";
         }
+        $menu .= "<li><a href='" . $pre . "index.php?mod=" . (LOGGED_IN == 'TRUE' ? 'Logout' : 'Register') . "'>" . (LOGGED_IN == 'TRUE' ? 'Logout' : 'Register') . "</a></li>";
         $menu .= "</ul>";
         return $menu;
     }
