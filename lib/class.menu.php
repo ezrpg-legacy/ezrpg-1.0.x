@@ -4,6 +4,7 @@ defined( 'IN_EZRPG' ) or exit;
 /*
 Class: Menu
 A class to handle the menu system
+TODO: Ease the load on the db
 */
 class Menu
 {
