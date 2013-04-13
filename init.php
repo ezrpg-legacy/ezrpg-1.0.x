@@ -73,4 +73,8 @@ foreach($hook_files as $hook_file)
 
 //Run login hooks on player variable
 $player = $hooks->run_hooks('player', 0);
+
+//Create the Menu object
+$menu = new Menu($db, $tpl, $player);
+$menu->get_menus($db, $tpl, ((defined('IN_ADMIN'))?'AdminMenu':'UserMenu'),"TOP_");
 ?>
