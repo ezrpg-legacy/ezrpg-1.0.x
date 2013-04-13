@@ -19,9 +19,9 @@ class Module_City extends Base_Module
 		$db = $this->db;
 		$tpl = $this->tpl;
 		$menu = $this->menu;
-		$menu->get_menus($db, $tpl, "UserMenu");
-		$menu->get_menus($db, $tpl, "WorldMenu", NULL, FALSE, FALSE);
-		$menu->get_menus($db, $tpl, "City", NULL, False, FALSE);
+		$menu->get_menus($db, $tpl, "UserMenu", FALSE, FALSE);
+		$menu->get_menus($db, $tpl, "WorldMenu", FALSE, FALSE);
+		$menu->get_menus($db, $tpl, "City", False, FALSE);
         $this->tpl->display('city.tpl');
     }
 }
