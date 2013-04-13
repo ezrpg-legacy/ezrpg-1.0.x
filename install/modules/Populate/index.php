@@ -75,7 +75,6 @@ QUERY;
 	$query4 = <<<QUERY
 INSERT INTO `<ezrpg>menu` (`id`, `parent_id`, `name`, `title`, `uri`) VALUES
 (1, NULL, 'UserMenu', 'User Menu', ''),
-(2, 1, 'Home', 'Home', 'index.php'),
 (3, 1, 'EventLog', 'Event Log', 'index.php?mod=EventLog'),
 (4, 1, 'City', 'City', 'index.php?mod=City'),
 (5, 1, 'Members', 'Members', 'index.php?mod=Members'),
