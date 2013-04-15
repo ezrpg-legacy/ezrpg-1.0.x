@@ -68,15 +68,54 @@ class Menu
     $add_menu ($bid, $db, 'Deposit', 'Deposit Money', 'index.php?mod=Bank&act=Deposit');
     */
     
-    function add_menu($pid = NULL, &$db, $name, $title, $uri = '')
+    function add_menu($pid = NULL, $name, $title = '', $alttitle = '', $uri = '')
     {
+		if(is_numeric($pid)){
         $item['parent_id'] = $pid;
-        $item['name']      = $name;
+		}else{
+		$item['parent_id'] = $this->get_menu_id_by_name($pid);
+        }
+		$item['AltTitle'] = $alttitle;
+		$item['name']      = $name;
         $item['title']     = $title;
         $item['uri']       = $uri;
-        return $db->insert("menu", $item);
+        return $this->db->insert("menu", $item);
     }
     
+	/*
+    Function: delete_menu
+    Deletes a menu to database.
+    
+    Parameters:
+	$id (Optional
+    $pid (Optional) Represents the Parent ID of the Menu this Menu belongs to.
+    
+    Example Usage:
+	$this->menu->delete_menu(6); //Deletes MenuID #6
+    $this->menu->delete_menu(6,2); //Deletes MenuID #6 ONLY IF it's parent is MenuID #2 
+	or
+	$this->menu->delete_menu(get_menu_id_by_name('Bank'), get_menu_id_by_name('City')); //Deletes Menu named Bank ONLY IF it's parent is Menu named City
+	$this->menu->delete_menu(get_menu_id_by_name('Bank')); Deletes Menu named "Bank"
+	*/
+	
+	function delete_menu($id = NULL, $pid= NULL){
+		if(isset($id) && isset($pid)){
+			return $this->db->execute('DELETE FROM `<ezrpg>menu` WHERE parent_id='. $pid . ' AND id='. $id);
+		}
+		else
+		{ 
+			if(isset($id)){
+				return $this->db->execute('DELETE FROM `<ezrpg>menu` WHERE id='. $id);
+			}
+			elseif(isset($pid)
+			{
+				return $this->db->execute('DELETE FROM `<ezrpg>menu` WHERE id='. $id);
+			}else{
+				return FALSE;
+			}
+		}
+	}
+	
     /*
     Function: get_menus
     Preforms the inital grab of the Parent menus.
@@ -87,12 +126,18 @@ class Menu
     $endings (BOOLEAN Optional) Determines if we should auto-include a Logout menu item.
     $menu (Optional) Initializes the $menu array variable    
     */
-    
-    function get_menus($parent = NULL, $begin = TRUE, $endings = TRUE, $menu = 0)
+	
+    function get_menus($parent = NULL, $args = 0, $begin = TRUE, $endings = TRUE, $title = "", $customtag = "", $showchildren = TRUE)
     {
-        if ($menu == 0) {
-            $menu = $this->menu;
-        }
+		if ($args != 0){
+		(isset($args['begin'])? $begin = $args['begin'] : '');
+		(isset($args['endings'])? $endings = $args['endings'] : '');
+		(isset($args['title'])? $title = $args['title'] : '');
+		(isset($args['customtag'])? $customtag = $args['customtag'] : '');
+		(isset($args['showchildren']) ? $showchildren = $args['showchildren'] : '');
+		}
+		$result = '';
+        $menu = $this->menu;
         if (LOGGED_IN != "TRUE") {
             $menu = "<ul>";
             $menu .= "<li><a href='index.php'>Home</a></li>";
@@ -105,21 +150,21 @@ class Menu
                 if ($parent != null || !is_null($ival->parent_id)) {
                     if (!is_numeric($parent)) {
                         if ($ival->name == $parent) {
-                            $result .= $this->get_children($ival->id);
+                            $result .= $this->get_children($ival->id, $title, $showchildren);
                             $result .= ($endings ? $this->get_menu_endings() : "</ul>");
-                            $this->tpl->assign('MENU_' . $ival->name, $result);
+                            $this->tpl->assign('MENU_' . (($customtag == "") ? $ival->name : $customtag), $result);
                         }
                     } else {
-                        $result .= $this->get_children($ival->id);
+                        $result .= $this->get_children($ival->id, $title, $showchildren);
                         $result .= ($endings ? $this->get_menu_endings() : "</ul>");
-                        $this->tpl->assign('MENU_' . $ival->name, $result);
+                        $this->tpl->assign('MENU_' . (($customtag == "")? $ival->name : $customtag), $result);
                     }
                 } else {
                     if (is_null($ival->parent_id)) //it's a group
                         {
-                        $result .= $this->get_children($ival->id);
+                        $result .= $this->get_children($ival->id, $title, $showchildren);
                         $result .= ($endings ? $this->get_menu_endings() : "</ul>");
-                        $this->tpl->assign('TOP_MENU_' . $ival->name, $result);
+                        $this->tpl->assign('TOP_MENU_' . (($customtag != 0)? $customtag : $ival->name), $result);
                     }
                 }
             }
@@ -135,9 +180,11 @@ class Menu
 	Parameters:
 	$parent (Optional): Sets the ParentID, if Null then it's a Group
 	$menu (Optional): Initializes the use of the $menu array variable
+	$title (Optional): Determines if you want to use Title(0), Alt Title (1) 
+	$showchildren (Optional): Determines if we're displaying any children menus.
 	*/
 	
-    function get_children($parent = NULL, $menu = 0)
+    function get_children($parent = NULL, $title = 0, $showchildren = TRUE, $menu = 0)
     {
         $result = "";
         if ($menu == 0) {
@@ -146,16 +193,19 @@ class Menu
         foreach ($menu as $item => $ival) {
             if (!is_numeric($parent)) {
                 if ($ival->name == $parent) {
-                    get_children($ival->id);
+                    $this->get_children($ival->id);
                     break;
                 }
             } else {
                 if ($ival->parent_id == $parent) {
-                    $result .= "<li><a href='" . $ival->uri . "'>" . $ival->title . "</a>";
-                    /*if ( $this->has_children($rows, $ival->id))
+                    $result .= "<li><a href='" . $ival->uri . "'>";
+					$result .= ($title == 0 ? $ival->title : $this->get_title($ival)) . "</a>";
+                    if ( $this->has_children($ival->id) && $showchildren == TRUE)
                     {
-                    $result.= $this->get_children ( $ival->id, $menu);
-                    }*/
+					$result .= "<ul>";
+                    $result .= $this->get_children ( $ival->id);
+                    $result .= "</ul>";
+					}
                     $result .= "</li>";
                 }
             }
@@ -163,6 +213,44 @@ class Menu
         return $result;
     }
     
+	function get_title($menu){
+	if(!is_null($menu->AltTitle)){
+	return $menu->AltTitle;
+	}else{
+	return $menu->title;
+	}
+	}
+	
+	/*
+	Function: has_children
+	BOOLEAN returns T/F if is a Parent Element
+    
+	Parameters:
+	$parent (Optional): Sets the ParentID, if Null then it's a Group
+	$menu (Optional): Initializes the use of the $menu array variable
+	*/
+	
+	function has_children($parent = null, $menu = 0){
+	if ($menu == 0) {
+            $menu = $this->menu;
+    }
+	foreach ($menu as $item => $ival){
+			if ($ival->parent_id == $parent)
+				return TRUE;
+	}
+	return false;
+	}
+	
+	
+	function get_menu_id_by_name($pid){
+		foreach ($this->menu as $item => $ival) {
+			if ($ival->name == $pid) {
+				return $ival->id;
+			}
+		}
+	}
+	
+	
     /*
     Function: add_menu_beginnings and add_menu_endings
     Sets up the start and end of the menu.
