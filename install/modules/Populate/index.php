@@ -66,6 +66,7 @@ CREATE TABLE IF NOT EXISTS `<ezrpg>menu` (
   `parent_id` int(11) DEFAULT NULL,
   `name` varchar(255) NOT NULL,
   `title` varchar(255) NOT NULL,
+  `AltTitle` varchar(255) DEFAULT NULL,
   `uri` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
@@ -73,16 +74,16 @@ QUERY;
 	$db->execute($query3);
 
 	$query4 = <<<QUERY
-INSERT INTO `<ezrpg>menu` (`id`, `parent_id`, `name`, `title`, `uri`) VALUES
-(1, NULL, 'UserMenu', 'User Menu', ''),
-(3, 1, 'EventLog', 'Event Log', 'index.php?mod=EventLog'),
-(4, 1, 'City', 'City', 'index.php?mod=City'),
-(5, 1, 'Members', 'Members', 'index.php?mod=Members'),
-(6, 1, 'Account', 'Account', 'index.php?mod=AccountSettings'),
-(7, NULL, 'WorldMenu', 'World Menu', ''),
-(8, 7, 'Members', 'Members', 'index.php?mod=Members'),
-(9, NULL, 'AdminMenu', 'Admin Menu', ''),
-(10, 9, 'Members', 'Members', 'index.php?mod=Members');
+INSERT INTO `<ezrpg>menu` (`id`, `parent_id`, `name`, `title`, `AltTitle`, `uri`) VALUES
+(1, NULL, 'UserMenu', 'User Menu',NULL, ''),
+(2, 1, 'EventLog', 'Event Log',NULL, 'index.php?mod=EventLog'),
+(3, 1, 'City', 'City',NULL, 'index.php?mod=City'),
+(4, 1, 'Members', 'Members',NULL, 'index.php?mod=Members'),
+(5, 1, 'Account', 'Account',NULL, 'index.php?mod=AccountSettings'),
+(6, NULL, 'WorldMenu', 'World Menu',NULL, ''),
+(7, 6, 'Members', 'Members',NULL, 'index.php?mod=Members'),
+(8, NULL, 'AdminMenu', 'Admin Menu',NULL, ''),
+(9, 8, 'Members', 'Members',NULL, 'index.php?mod=Members');
 QUERY;
 
 	$db->execute($query4);
