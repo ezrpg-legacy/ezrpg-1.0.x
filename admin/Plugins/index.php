@@ -16,20 +16,24 @@ class Admin_Plugins extends Base_Module
         if(isset($_GET['act'])){
 			switch ($_GET['act']) {
 				case 'view' :
-					$this->view_modules();
+					$this->view_modules(); //TODO:View Modules
 					break;
 				case 'upload' :
-					$this->upload_modules();
+					$this->upload_modules(); //Completed:Upload Modules
 					break;
 				case 'remove' :
-					$this->remove_modules();
+					$this->remove_modules(); //TODO:Remove Modules
 					break;
 				case 'install' :
-					$this->install_manager();
+					$this->install_manager(); //Completed:Install Manager
 					break;
 				case 'list' :
-					$this->list_modules();
+					$this->list_modules(); //Completed:Lists Modules
 					break;
+				case 'activate' :
+					break; //TODO:activate plugins after they've been installed.
+				case 'deactivate' :
+					break; //TODO:deactivate plugins but not remove them.
 			}
 		} else {
 		$this->list_modules();
@@ -132,7 +136,7 @@ class Admin_Plugins extends Base_Module
 		$this->tpl->assign("RESULTS", $results);
 		$this->tpl->display('admin/plugin_results.tpl');
 	}
-  private function install_ask() {
+	private function install_ask() {
 	$result = $this->db->fetchRow('SELECT COUNT(id) AS count FROM <ezrpg>plugins');
 	if($result){
 	$this->tpl->assign('INSTALLED', TRUE);
@@ -140,7 +144,7 @@ class Admin_Plugins extends Base_Module
 	$this->tpl->assign('INSTALLED', FALSE);
 	}
   }
- private function remove_modules(){
+	private function remove_modules(){
 		$data = "This feature still isn't compelte.<br />";
 		$data .= "The road map for this feature is as follows:<br />";
 		$data .= "<b>FIRST</b><br />Delete files only as they appear from the .xml file.<br />";
@@ -161,7 +165,7 @@ class Admin_Plugins extends Base_Module
 			rmdir($dir); 
 		} 
 	}
-	function re_copy($src,$dst) { 
+	private function re_copy($src,$dst) { 
     $dir = opendir($src); 
     @mkdir($dst); 
     while(false !== ( $file = readdir($dir)) ) { 
