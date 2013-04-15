@@ -58,15 +58,14 @@ class Menu
     
     Parameters:
     $pid (Optional) Represents the Parent ID of the Menu this Menu belongs to.
+    &$db (Mandatory) Opens the function up to the Database class.
     $name (Mandatory) Sets the 1word Name of the Menu.
     $title (Mandatory) Sets the User-Friendly Name of the menu.
-    &alttitle (Optional) Sets the Alternative Title for the menu.
     $uri (Optional) Sets the uri that the menu will go to.
     
     Example Usage:
-    $this->menu->add_menu('AdminMenu', 'Plugins', 'Plugins', 'Plugin Manager', 'index.php?mod=Plugins'); //As seen in admin/Plugins/index.php
-    $bid = $this->menu->add_menu($this->menu->get_menu_id_by_name('City'),'Bank','Empire Bank', '', 'index.php?mod=Bank'); Gets id of 'City' Menu and adds a Menu named 'Bank' with a Title named 'Empire Bank'
-    $this->menu->add_menu ($bid, 'Deposit', 'Deposit Money', '', 'index.php?mod=Bank&act=Deposit'); //Adds a submenu to Bank named 'Deposit'
+    $bid = add_menu('',$db,'Bank','Empire Bank', 'index.php?mod=Bank');
+    $add_menu ($bid, $db, 'Deposit', 'Deposit Money', 'index.php?mod=Bank&act=Deposit');
     */
     
     function add_menu($pid = NULL, $name, $title = '', $alttitle = '', $uri = '')
@@ -108,7 +107,7 @@ class Menu
 			if(isset($id)){
 				return $this->db->execute('DELETE FROM `<ezrpg>menu` WHERE id='. $id);
 			}
-			elseif(isset($pid)
+			elseif(isset($pid))
 			{
 				return $this->db->execute('DELETE FROM `<ezrpg>menu` WHERE id='. $id);
 			}else{
@@ -214,6 +213,16 @@ class Menu
         return $result;
     }
     
+	/*
+	Function: get_title()
+	
+	Returns:
+	Menu's Title or Altnerative Title depending on if an AltTitle is set
+	
+	Parameters:
+	$menu (Manadatory): Represents current row in Menu DB
+	*/
+	
 	function get_title($menu){
 	if(!is_null($menu->AltTitle)){
 	return $menu->AltTitle;
