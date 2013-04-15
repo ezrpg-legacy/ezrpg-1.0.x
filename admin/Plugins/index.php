@@ -124,11 +124,11 @@ class Admin_Plugins extends Base_Module
 		header('location: index.php?mod=Plugins&act=list');
 		exit;
 		}
+		$this->menu->add_menu('AdminMenu', 'Plugins', 'Plugins', 'Plugin Manager', 'index.php?mod=Plugins');
 		$results .= "Done. <br />Adding Plugin Manager DB<br />";
 		$this->db->execute("insert into ". DB_PREFIX ."plugins (id, title, description, author, active, version, xml_location) values (1, 'ezRPG PluginManager', 'Plugin Manager Beta', 'Tim G', 1, '0.01', '" . CUR_DIR . "/Plugins/plugin.xml')");
 		$results .= "Done. <br />";
 		$results .= "<a href='index.php?mod=Plugins&act=list'>Go To Manager</a>";
-		//$this->db->debug = false;
 		$this->tpl->assign("RESULTS", $results);
 		$this->tpl->display('admin/plugin_results.tpl');
 	}
