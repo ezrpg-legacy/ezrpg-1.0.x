@@ -45,7 +45,7 @@ class Menu
         $this->db =& $db;
         $this->tpl =& $tpl;
         $this->player =& $player;
-        $query      = $this->db->execute('SELECT * FROM `<ezrpg>menu`');
+        $query      = $this->db->execute('SELECT * FROM `<ezrpg>menu` ORDER BY `pos`');
         $this->menu = $db->fetchAll($query);
     }
     
@@ -58,27 +58,41 @@ class Menu
     
     Parameters:
     $pid (Optional) Represents the Parent ID of the Menu this Menu belongs to.
-    &$db (Mandatory) Opens the function up to the Database class.
     $name (Mandatory) Sets the 1word Name of the Menu.
     $title (Mandatory) Sets the User-Friendly Name of the menu.
     $uri (Optional) Sets the uri that the menu will go to.
+    $pos (Optional) Sets position menu appears in order of other menus.
     
     Example Usage:
-    $bid = add_menu('',$db,'Bank','Empire Bank', 'index.php?mod=Bank');
-    $add_menu ($bid, $db, 'Deposit', 'Deposit Money', 'index.php?mod=Bank&act=Deposit');
+    $bid = add_menu('','Bank','Empire Bank', '', 'index.php?mod=Bank', 3);
+    $add_menu ($bid, 'Deposit', 'Deposit Money', '', 'index.php?mod=Bank&act=Deposit');
     */
     
-    function add_menu($pid = NULL, $name, $title = '', $alttitle = '', $uri = '')
+    function add_menu($pid = NULL, $name, $title = '', $alttitle = NULL, $uri = '', $pos = '')
     {
-		if(is_numeric($pid)){
-        $item['parent_id'] = $pid;
+		if($pid != NULL)
+		{
+			if(is_numeric($pid)){
+				$item['parent_id'] = $pid;
+			}else{
+				$item['parent_id'] = $this->get_menu_id_by_name($pid);
+			}	
 		}else{
-		$item['parent_id'] = $this->get_menu_id_by_name($pid);
-        }
+			$item['parent_id'] = $pid;
+		}
 		$item['AltTitle'] = $alttitle;
 		$item['name']      = $name;
         $item['title']     = $title;
         $item['uri']       = $uri;
+        if($pos == ''){
+        	if($item['parent_id'] == NULL)
+        		{
+        			$pos = '0';
+        		} else {
+        			$pos = $this->get_next_pos($item['parent_id']);
+        		}
+        }
+        $item['pos']	   = $pos;
         return $this->db->insert("menu", $item);
     }
     
@@ -251,6 +265,14 @@ class Menu
 	return false;
 	}
 	
+	/*
+	Function: has_children
+	BOOLEAN returns T/F if is a Parent Element
+    
+	Parameters:
+	$parent (Optional): Sets the ParentID, if Null then it's a Group
+	$menu (Optional): Initializes the use of the $menu array variable
+	*/
 	
 	function get_menu_id_by_name($pid){
 		foreach ($this->menu as $item => $ival) {
@@ -260,7 +282,53 @@ class Menu
 		}
 	}
 	
+	/*
+	Function: countmenus
+	Returns the number of menus the group has
+    
+	Parameters:
+	$pid (Optional): Sets the ParentID, if Null then it's a Group
+	*/
 	
+	function countmenus($pid = "")
+	{
+		$result = 0;
+        foreach ($this->menu as $item => $ival) {
+            if ($ival->parent_id == $pid) 
+			{
+				$result++;
+            }
+        }
+        return $result;
+	}
+	
+	/*
+	Function: get_next_pos
+	Returns the next incremented position
+    
+	Parameters:
+	$pid (Optional): Initializes the parentid variable
+	$pos (Optional): Initializes the use of the $pos variable
+	*/
+	
+	function get_next_pos($pid = "", $pos = "")
+	{
+		$result = 0;
+		if($pos == ""){
+			$pos = 0;
+		}
+        foreach ($this->menu as $item => $ival) {
+            if ($ival->parent_id == $pid) 
+			{
+				if ($ival->pos == $pos){
+					$result = $this->get_next_pos($pid, ++$pos);
+				} else {
+					$result = $pos;
+				}
+            }
+        }
+        return $result;
+	}
     /*
     Function: add_menu_beginnings and add_menu_endings
     Sets up the start and end of the menu.
