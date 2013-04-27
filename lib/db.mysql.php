@@ -497,9 +497,13 @@ class Db_mysql
       */
     function update($table, $fields, $where)
 	{
-		if ($this->isConnected === false)
+		 if ($this->isConnected === false)
             $this->connect();
-
+		if(!strpos("<ezrpg>",$table)){
+			$table = DB_PREFIX . $table;
+		}
+        $table = str_replace('<ezrpg>', DB_PREFIX, $table);
+		
 		$i = 0;
 		$var = "";
 		$numFields = count($fields);
@@ -509,7 +513,6 @@ class Db_mysql
 			else
 			$var .= $key . "='".$val ."', ";
 		}
-		$table = str_replace('<ezrpg>', $this->prefix, $table);
 		$sql = "Update ". mysql_real_escape_string($table, $this->db) ." SET ". $var ." WHERE " . $where;
 		return $this->execute($sql);
 	}
