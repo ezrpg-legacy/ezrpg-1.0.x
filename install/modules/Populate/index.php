@@ -85,8 +85,8 @@ INSERT INTO `<ezrpg>menu` (`id`, `parent_id`, `name`, `title`, `AltTitle`, `uri`
 (6, 0, 'WorldMenu', 'World Menu',NULL, '', 0),
 (7, 6, 'Members', 'Members',NULL, 'index.php?mod=Members', 0),
 (8, 0, 'AdminMenu', 'Admin Menu',NULL, '', 0),
-(9, 8, 'Members', 'Members','Member Management', 'index.php?mod=Members', 0);
-(10, 8, 'Menus', 'Memus', 'Menu Management', 'index.php?mod=Menu', 0);
+(9, 8, 'Members', 'Members','Member Management', 'index.php?mod=Members', 0),
+(10, 8, 'Menus', 'Menus', 'Menu Management', 'index.php?mod=Menu', 0),
 (11, 8, 'Plugins', 'Plugins', 'Plugin Management', 'index.php?mod=Plugins', 0);
 QUERY;
 
