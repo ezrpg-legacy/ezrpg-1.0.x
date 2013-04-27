@@ -77,17 +77,17 @@ QUERY;
 
 	$query4 = <<<QUERY
 INSERT INTO `<ezrpg>menu` (`id`, `parent_id`, `name`, `title`, `AltTitle`, `uri`, `pos`) VALUES
-(1, 0, 'UserMenu', 'User Menu',NULL, ''),
+(1, 0, 'UserMenu', 'User Menu',NULL, '', 0),
 (2, 1, 'EventLog', 'Event Log',NULL, 'index.php?mod=EventLog', 0),
 (3, 1, 'City', 'City',NULL, 'index.php?mod=City', 1),
 (4, 1, 'Members', 'Members',NULL, 'index.php?mod=Members', 2),
 (5, 1, 'Account', 'Account',NULL, 'index.php?mod=AccountSettings', 3),
-(6, 0, 'WorldMenu', 'World Menu',NULL, ''),
-(7, 6, 'Members', 'Members',NULL, 'index.php?mod=Members'),
-(8, 0, 'AdminMenu', 'Admin Menu',NULL, ''),
-(9, 8, 'Members', 'Members','Member Management', 'index.php?mod=Members');
-(10, 8, 'Menus', 'Memus', 'Menu Management', 'index.php?mod=Menu');
-(11, 8, 'Plugins', 'Plugins', 'Plugin Management', 'index.php?mod=Plugins');
+(6, 0, 'WorldMenu', 'World Menu',NULL, '', 0),
+(7, 6, 'Members', 'Members',NULL, 'index.php?mod=Members', 0),
+(8, 0, 'AdminMenu', 'Admin Menu',NULL, '', 0),
+(9, 8, 'Members', 'Members','Member Management', 'index.php?mod=Members', 0);
+(10, 8, 'Menus', 'Memus', 'Menu Management', 'index.php?mod=Menu', 0);
+(11, 8, 'Plugins', 'Plugins', 'Plugin Management', 'index.php?mod=Plugins', 0);
 QUERY;
 
 	$db->execute($query4);
