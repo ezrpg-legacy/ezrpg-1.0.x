@@ -60,10 +60,10 @@ CREATE TABLE IF NOT EXISTS `<ezrpg>player_log` (
 QUERY;
 	$db->execute($query2);
 
-	$query3 = <<<QUERY
+		$query3 = <<<QUERY
 CREATE TABLE IF NOT EXISTS `<ezrpg>menu` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `parent_id` int(11) DEFAULT NULL,
+  `parent_id` int(11) DEFAULT 0,
   `name` varchar(255) NOT NULL,
   `title` varchar(255) NOT NULL,
   `AltTitle` varchar(255) DEFAULT NULL,
@@ -76,15 +76,17 @@ QUERY;
 
 	$query4 = <<<QUERY
 INSERT INTO `<ezrpg>menu` (`id`, `parent_id`, `name`, `title`, `AltTitle`, `uri`, `pos`) VALUES
-(1, NULL, 'UserMenu', 'User Menu',NULL, ''),
+(1, 0, 'UserMenu', 'User Menu',NULL, ''),
 (2, 1, 'EventLog', 'Event Log',NULL, 'index.php?mod=EventLog', 0),
 (3, 1, 'City', 'City',NULL, 'index.php?mod=City', 1),
 (4, 1, 'Members', 'Members',NULL, 'index.php?mod=Members', 2),
 (5, 1, 'Account', 'Account',NULL, 'index.php?mod=AccountSettings', 3),
-(6, NULL, 'WorldMenu', 'World Menu',NULL, ''),
+(6, 0, 'WorldMenu', 'World Menu',NULL, ''),
 (7, 6, 'Members', 'Members',NULL, 'index.php?mod=Members'),
-(8, NULL, 'AdminMenu', 'Admin Menu',NULL, ''),
-(9, 8, 'Members', 'Members',NULL, 'index.php?mod=Members');
+(8, 0, 'AdminMenu', 'Admin Menu',NULL, ''),
+(9, 8, 'Members', 'Members','Member Management', 'index.php?mod=Members');
+(10, 8, 'Menus', 'Memus', 'Menu Management', 'index.php?mod=Menu');
+(11, 8, 'Plugins', 'Plugins', 'Plugin Management', 'index.php?mod=Plugins');
 QUERY;
 
 	$db->execute($query4);
