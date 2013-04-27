@@ -61,4 +61,14 @@ function isEmail($email)
         return false;
     return true;
 }
+
+
+function isClean($input)
+{
+if (!preg_match("/^[_a-zA-Z0-9]+$/", $input))
+        if (!isset($input))
+  		return false;
+    //Everything's fine, return true
+    return true;
+}
 ?>
