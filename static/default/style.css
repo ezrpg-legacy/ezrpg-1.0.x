@@ -25,6 +25,11 @@ p {
 	padding: 5px;
 }
 
+ul{
+list-style-type:none;
+padding:5px;
+}
+
 label {
 	display: block;
 	margin-top: 5px;
@@ -78,18 +83,31 @@ img {
 }
 
 #nav {
-	display: block;
 	width: 100%;
 	clear: both;
 }
 
+#nav ul ul{
+	display: none;
+}
+
+#nav ul li:hover > ul{
+	display:block;
+}
+
 #nav ul {
+	display: inline-table;
 	padding: 0em;
 	margin: 0em;
 	list-style: none;
+	position:relative;
 }
 
-#nav li a {
+#nav ul li {
+	float: left;
+}
+
+#nav ul li a {
 	display: block;
 	float: left;
 	width: 95px;
@@ -104,10 +122,19 @@ img {
 	text-align: center;
 }
 	
-#nav a:hover {
+#nav ul a:hover {
 	color: #3399FF;
 	background-color: #FAFAFA;
 	text-decoration: none;
+}
+
+#nav ul ul {
+	position: absolute; top: 100%;
+}
+
+#nav ul ul li {
+	float: none;
+	position: relative;
 }
 
 #sidebar {
