@@ -68,18 +68,13 @@ class Menu
     $add_menu ($bid, 'Deposit', 'Deposit Money', '', 'index.php?mod=Bank&act=Deposit');
     */
     
-    function add_menu($pid = NULL, $name, $title = '', $alttitle = NULL, $uri = '', $pos = '')
+    function add_menu($pid = 0, $name, $title = '', $alttitle = NULL, $uri = '', $pos = '')
     {
-		if($pid != NULL)
-		{
 			if(is_numeric($pid)){
 				$item['parent_id'] = $pid;
 			}else{
 				$item['parent_id'] = $this->get_menu_id_by_name($pid);
 			}	
-		}else{
-			$item['parent_id'] = $pid;
-		}
 		$item['AltTitle'] = $alttitle;
 		$item['name']      = $name;
         $item['title']     = $title;
@@ -96,6 +91,49 @@ class Menu
         return $this->db->insert("menu", $item);
     }
     
+	/*
+    Function: add_menu
+    Adds menu to database.
+    
+    Returns:
+    Inserted ID of menu added
+    
+    Parameters:
+    $pid (Optional) Represents the Parent ID of the Menu this Menu belongs to.
+    $name (Mandatory) Sets the 1word Name of the Menu.
+    $title (Mandatory) Sets the User-Friendly Name of the menu.
+    $uri (Optional) Sets the uri that the menu will go to.
+    $pos (Optional) Sets position menu appears in order of other menus.
+    
+    Example Usage:
+    $bid = add_menu('','Bank','Empire Bank', '', 'index.php?mod=Bank', 3);
+    $add_menu ($bid, 'Deposit', 'Deposit Money', '', 'index.php?mod=Bank&act=Deposit');
+    */
+    
+    function edit_menu($mid = '' ,$pid = 0, $name, $title = '', $alttitle = NULL, $uri = '', $pos = '', $active = '')
+    {
+			if(is_numeric($pid)){
+				$item['parent_id'] = $pid;
+			}else{
+				$item['parent_id'] = $this->get_menu_id_by_name($pid);	
+			}	
+		$item['AltTitle'] = $alttitle;
+		$item['name']      = $name;
+        $item['title']     = $title;
+        $item['uri']       = $uri;
+        if($pos == ''){
+        	if($item['parent_id'] == 0)
+        		{
+        			$pos = '0';
+        		} else {
+        			$pos = $this->get_next_pos($item['parent_id']);
+        		}
+        }
+        $item['pos']	   = $pos;
+		$item['active']	   = $active;
+        return $this->db->update("menu", $item, "id = ". $mid);
+    }
+	
 	/*
     Function: delete_menu
     Deletes a menu to database.
@@ -141,7 +179,7 @@ class Menu
     $menu (Optional) Initializes the $menu array variable    
     */
 	
-    function get_menus($parent = NULL, $args = 0, $begin = TRUE, $endings = TRUE, $title = "", $customtag = "", $showchildren = TRUE)
+    function get_menus($parent = null, $args = 0, $begin = TRUE, $endings = TRUE, $title = "", $customtag = "", $showchildren = TRUE)
     {
 		if ($args != 0){
 		(isset($args['begin'])? $begin = $args['begin'] : '');
@@ -161,7 +199,9 @@ class Menu
         } else {
             foreach ($menu as $item => $ival) {
                 $result = ($begin ? $this->get_menu_beginnings() : "<ul>");
-                if ($parent != null || !is_null($ival->parent_id)) {
+				if ($ival->active == 1){
+				$this->tpl->assign('Menu'.$ival->name, $parent . " : " . $ival->parent_id);
+                if ($parent != null || $ival->parent_id != 0) {
                     if (!is_numeric($parent)) {
                         if ($ival->name == $parent) {
                             $result .= $this->get_children($ival->id, $title, $showchildren);
@@ -174,13 +214,14 @@ class Menu
                         $this->tpl->assign('MENU_' . (($customtag == "")? $ival->name : $customtag), $result);
                     }
                 } else {
-                    if (is_null($ival->parent_id)) //it's a group
+                    if ($ival->parent_id == 0) //it's a group
                         {
                         $result .= $this->get_children($ival->id, $title, $showchildren);
                         $result .= ($endings ? $this->get_menu_endings() : "</ul>");
                         $this->tpl->assign('TOP_MENU_' . (($customtag != 0)? $customtag : $ival->name), $result);
                     }
                 }
+				}
             }
         }
         $result .= "</ul>";
@@ -192,20 +233,21 @@ class Menu
 	Gets the submenus of a Menu's Parent_ID
     
 	Parameters:
-	$parent (Optional): Sets the ParentID, if Null then it's a Group
+	$parent (Optional): Sets the ParentID, if 0 then it's a Group
 	$menu (Optional): Initializes the use of the $menu array variable
 	$title (Optional): Determines if you want to use Title(0), Alt Title (1) 
 	$showchildren (Optional): Determines if we're displaying any children menus.
 	*/
 	
-    function get_children($parent = NULL, $title = 0, $showchildren = TRUE, $menu = 0)
+    function get_children($parent = 0, $title = 0, $showchildren = TRUE, $menu = 0)
     {
         $result = "";
         if ($menu == 0) {
             $menu = $this->menu;
         }
         foreach ($menu as $item => $ival) {
-            if (!is_numeric($parent)) {
+            if ($ival->active == 1){
+			if (!is_numeric($parent)) {
                 if ($ival->name == $parent) {
                     $this->get_children($ival->id);
                     break;
@@ -223,7 +265,7 @@ class Menu
                     $result .= "</li>";
                 }
             }
-        }
+        }}
         return $result;
     }
     
@@ -329,6 +371,15 @@ class Menu
         }
         return $result;
 	}
+	function isMenu($mid = 0, $menu = ""){
+		foreach ($this->menu as $item => $ival){
+			if ($ival->id == $mid){
+				return true;
+			}
+		}
+		return false;
+	}
+	
     /*
     Function: add_menu_beginnings and add_menu_endings
     Sets up the start and end of the menu.
