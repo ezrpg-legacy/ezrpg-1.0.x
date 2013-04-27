@@ -12,7 +12,7 @@
 <input type="text" name="mname" value="{$mitem->name}" required="true" />
 <label for="mpid">Menu Parent_ID:</label>
 <select name="mpid" required="true" form="menu">
-<option value="null">Create A Group</option>
+<option value="0">Create A Group</option>
 {foreach from=$menubox item=mitm}
 {if $mitem->parent_id eq $mitm->id} 
  <option value="{$mitm->id}" selected> 
@@ -63,7 +63,7 @@
 <input type="text" name="mname" value="{$mname}" required="true" />
 <label for="mpid">Menu Parent_ID:</label>
 <select name="mpid" required="true" form="menu">
-<option value="null">Create A Group</option>
+<option value="0">Create A Group</option>
 {foreach from=$menus item=mitem}
  <option value="{$mitem->id}">{$mitem->title}</option>
 {/foreach}
