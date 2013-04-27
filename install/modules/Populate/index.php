@@ -63,7 +63,8 @@ QUERY;
 		$query3 = <<<QUERY
 CREATE TABLE IF NOT EXISTS `<ezrpg>menu` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `parent_id` int(11) DEFAULT 0,
+  `active` int(11) NOT NULL,
+  `parent_id` int(11) NOT NULL DEFAULT '0',
   `name` varchar(255) NOT NULL,
   `title` varchar(255) NOT NULL,
   `AltTitle` varchar(255) DEFAULT NULL,
