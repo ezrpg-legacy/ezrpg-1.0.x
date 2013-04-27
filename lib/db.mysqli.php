@@ -72,6 +72,7 @@ class Db_mysqli
         $this->dbname = $dbname;
         $this->username = $username;
         $this->password = $password;
+		$this->prefix = DB_PREFIX;
     }
 
     /*
@@ -113,8 +114,8 @@ class Db_mysqli
 
         try 
 		{
-            //SQL queries should query for tables with <ezrpg>tablename so that <ezrpg> is replaced with the table prefix.
             $query = str_replace('<ezrpg>', DB_PREFIX, $query);
+            //SQL queries should query for tables with <ezrpg>tablename so that <ezrpg> is replaced with the table prefix.
 
             //Parameter binding
             if ($params != 0) 
@@ -376,9 +377,12 @@ class Db_mysqli
     public function insert($table, $data) {
         if ($this->isConnected === false)
             $this->connect();
-
+		if(!strpos($table,"<ezrpg>") && !strpos($table, DB_PREFIX)){
+			$table = $this->prefix . $table;
+		}else{
         $table = str_replace('<ezrpg>', $this->prefix, $table);
-        $query = 'INSERT INTO ' . $this->db->real_escape_string($table) . ' (';
+        }
+		$query = 'INSERT INTO ' . $this->db->real_escape_string($table) . ' (';
 
         $cols = count($data);
         $part1 = ''; //List of column names
@@ -461,6 +465,48 @@ class Db_mysqli
             return true;
         }
     }
+	
+	/*
+      Function: update
+      Updates a row based on where clause
+	
+      Parameters:
+      $table - Database Table
+      $fields - Array containing Col and Val
+      $where - Where Clause
+      	
+      Usuage:
+      $fields['money'] = $this->player->money + 100;
+      $fields['exp'] = $this->player->exp + 25;
+      $fields['kills'] = $this->player->kills + 1;
+      $this->db->update('<ezrpg>players', $fields, "ID = '" . $this->player->id . "'");
+      
+      Considerations:
+      Possible a 4th Argument: WhereCol and WhereVal
+      This would allow you to preform functions on the value itself.
+      Also it could allow for a default column to be select (perhaps player->id?)
+      */
+    function update($table, $fields, $where)
+	{
+		 if ($this->isConnected === false)
+            $this->connect();
+		if(!strpos($table,"<ezrpg>") && !strpos($table, DB_PREFIX)){
+			$table = $this->prefix . $table;
+		}else{
+        $table = str_replace('<ezrpg>', $this->prefix, $table);
+        }
+		$i = 0;
+		$var = "";
+		$numFields = count($fields);
+		foreach ($fields as $key => $val){
+			if(++$i === $numFields)
+			$var .= $key . "='".$val ."'";
+			else
+			$var .= $key . "='".$val ."', ";
+		}
+		$sql = "Update ". $this->db->real_escape_string($table, $this->db) ." SET ". $var ." WHERE " . $where;
+		return $this->execute($sql);
+	}
 
 }
 
