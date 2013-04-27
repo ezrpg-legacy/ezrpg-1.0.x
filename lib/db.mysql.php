@@ -53,6 +53,7 @@ class Db_mysql
     protected $dbname;
     protected $username;
     protected $password;
+	protected $prefix;
 	
 	
     /*
@@ -71,6 +72,7 @@ class Db_mysql
         $this->dbname = $dbname;
         $this->username = $username;
         $this->password = $password;
+		$this->prefix = DB_PREFIX;
     }
 	
     /*
@@ -379,11 +381,12 @@ class Db_mysql
     {
         if ($this->isConnected === false)
             $this->connect();
-		if(!strpos("<ezrpg>",$table)){
-			$table = DB_PREFIX . $table;
-		}
-        $table = str_replace('<ezrpg>', DB_PREFIX, $table);
-        $query = 'INSERT INTO ' . mysql_real_escape_string($table, $this->db) . ' (';
+		if(!strpos($table,"<ezrpg>") && !strpos($table, DB_PREFIX)){
+			$table = $this->prefix . $table;
+		}else{
+			$table = str_replace('<ezrpg>', $this->prefix, $table);
+        }
+		$query = 'INSERT INTO ' . mysql_real_escape_string($table, $this->db) . ' (';
 		
         $cols = count($data);
         $part1 = ''; //List of column names
@@ -499,11 +502,11 @@ class Db_mysql
 	{
 		 if ($this->isConnected === false)
             $this->connect();
-		if(!strpos("<ezrpg>",$table)){
-			$table = DB_PREFIX . $table;
-		}
-        $table = str_replace('<ezrpg>', DB_PREFIX, $table);
-		
+		if(!strpos($table,"<ezrpg>") && !strpos($table, DB_PREFIX)){
+			$table = $this->prefix . $table;
+		}else{
+			$table = str_replace('<ezrpg>', $this->prefix, $table);
+        }
 		$i = 0;
 		$var = "";
 		$numFields = count($fields);
