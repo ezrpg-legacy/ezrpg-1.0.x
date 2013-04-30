@@ -55,7 +55,6 @@ class Db_mysql
     protected $password;
 	protected $prefix;
 	
-	
     /*
       Constructor: __construct
       Saves the connection data for later use. Does not start a connection yet.
@@ -381,11 +380,8 @@ class Db_mysql
     {
         if ($this->isConnected === false)
             $this->connect();
-		if(!strpos($table,"<ezrpg>") && !strpos($table, DB_PREFIX)){
-			$table = $this->prefix . $table;
-		}else{
-			$table = str_replace('<ezrpg>', $this->prefix, $table);
-        }
+		
+		$table = str_replace('<ezrpg>', DB_PREFIX, $table);
 		$query = 'INSERT INTO ' . mysql_real_escape_string($table, $this->db) . ' (';
 		
         $cols = count($data);
@@ -502,11 +498,8 @@ class Db_mysql
 	{
 		 if ($this->isConnected === false)
             $this->connect();
-		if(!strpos($table,"<ezrpg>") && !strpos($table, DB_PREFIX)){
-			$table = $this->prefix . $table;
-		}else{
-			$table = str_replace('<ezrpg>', $this->prefix, $table);
-        }
+
+		$table = str_replace('<ezrpg>', DB_PREFIX, $table);
 		$i = 0;
 		$var = "";
 		$numFields = count($fields);
