@@ -88,7 +88,7 @@ class Menu
         		}
         }
         $item['pos']	   = $pos;
-        return $this->db->insert("menu", $item);
+        return $this->db->insert("<ezrpg>menu", $item);
     }
     
 	/*
@@ -131,7 +131,7 @@ class Menu
         }
         $item['pos']	   = $pos;
 		$item['active']	   = $active;
-        return $this->db->update("menu", $item, "id = ". $mid);
+        return $this->db->update("<ezrpg>menu", $item, "id = ". $mid);
     }
 	
 	/*
