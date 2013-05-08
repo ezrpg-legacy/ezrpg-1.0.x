@@ -74,7 +74,7 @@ class Admin_Members extends Base_Module
             exit;
         }
         
-        $member = $this->db->fetchRow('SELECT `id`, `username`, `email`, `rank`, `money`, `level` FROM `<ezrpg>players` WHERE `id`=?', array( intval($_GET['id']) ));
+        $member = $this->db->fetchRow('SELECT `id`, `username`, `email`, `rank`, `money`, `level`, `stat_points`, `strength`, `vitality`, `agility`, `dexterity`, `damage`, `kills`, `deaths` FROM `<ezrpg>players` WHERE `id`=?', array( intval($_GET['id']) ));
         
         //No rows found
         if ($member == false)
@@ -100,11 +100,16 @@ class Admin_Members extends Base_Module
             $msg .= 'You forgot to enter an email address.<br />';
         }
         
-        $_POST['rank'] = (!empty($_POST['rank']))?intval($_POST['rank']):$member->rank;
-        if (!isset($_POST['rank']))
+        if(!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL))
         {
             $errors = 1;
-            $msg .= 'You didn\'t enter a rank for this player.<br />';
+            $msg .= 'Email is invalid.<br />';
+        }
+        
+        if ($_POST['rank'] < 0 || !filter_var($_POST['rank'], FILTER_VALIDATE_INT))
+        {
+            $errors = 1;
+            $msg .= 'The rank you entered was invalid.<br />';
         }
         
         //If the rank of the player you're editing is higher or equal to your own rank, then you are not allowed to edit their rank
@@ -122,18 +127,64 @@ class Admin_Members extends Base_Module
             $msg .= 'You can\'t set a member\'s rank to higher than your own!<br />';
         }
         
-        $_POST['money'] = intval($_POST['money']);
-        if ($_POST['money'] < 0)
+        if ($_POST['money'] < 0 || !filter_var($_POST['money'], FILTER_VALIDATE_INT))
         {
             $errors = 1;
             $msg .= 'The player must have a positive amount of money!<br />';
         }
         
-        $_POST['level'] = intval($_POST['level']);
-        if ($_POST['level'] < 0)
+        if ($_POST['level'] < 0 || !filter_var($_POST['level'], FILTER_VALIDATE_INT))
         {
             $errors = 1;
             $msg .= 'The player must have a level higher than 0!<br />';
+        }
+        
+        if ($_POST['stat_points'] < 0 || !filter_var($_POST['stat_points'], FILTER_VALIDATE_INT))
+        {
+            $errors = 1;
+            $msg .= 'Stat points are invalid';
+        }
+        
+        if ($_POST['strength'] < 0 || !filter_var($_POST['strength'], FILTER_VALIDATE_INT))
+        {
+            $errors = 1;
+            $msg .= 'Strength points are invalid';
+        }
+        
+        if ($_POST['vitality'] < 0 || !filter_var($_POST['vitality'], FILTER_VALIDATE_INT))
+        {
+            $errors = 1;
+            $msg .= 'Vitality points are invalid';
+        }
+        
+        if ($_POST['agility'] < 0 || !filter_var($_POST['agility'], FILTER_VALIDATE_INT))
+        {
+            $errors = 1;
+            $msg .= 'Agility points are invalid';
+        }
+        
+        if ($_POST['dexterity'] < 0 || !filter_var($_POST['dexterity'], FILTER_VALIDATE_INT))
+        {
+            $errors = 1;
+            $msg .= 'Dexterity points are invalid';
+        }
+        
+        if ($_POST['damage'] < 0 || !filter_var($_POST['damage'], FILTER_VALIDATE_INT))
+        {
+            $errors = 1;
+            $msg .= 'Damage points are invalid';
+        }
+        
+        if ($_POST['kills'] < 0 || !filter_var($_POST['kills'], FILTER_VALIDATE_INT))
+        {
+            $errors = 1;
+            $msg .= 'Kill points are invalid';
+        }
+        
+        if ($_POST['deaths'] < 0 || !filter_var($_POST['deaths'], FILTER_VALIDATE_INT))
+        {
+            $errors = 1;
+            $msg .= 'Death points are invalid';
         }
         
         //The form wasn't filled out correctly
@@ -143,6 +194,14 @@ class Admin_Members extends Base_Module
             $member->rank = $_POST['rank'];
             $member->money = $_POST['money'];
             $member->level = $_POST['level'];
+            $member->stat_points = $_POST['stat_points'];
+            $member->strength = $_POST['strength'];
+            $member->vitality = $_POST['vitality'];
+            $member->agility = $_POST['agility'];
+            $member->dexterity = $_POST['dexterity'];
+            $member->damage = $_POST['damage'];
+            $member->kills = $_POST['kills'];
+            $member->deaths = $_POST['deaths'];
             
             $this->tpl->assign('member', $member);
             $this->tpl->assign('GET_MSG', $msg);
@@ -152,7 +211,7 @@ class Admin_Members extends Base_Module
         else
         {
             //No errors, update player info
-            $query = $this->db->execute('UPDATE `<ezrpg>players` SET `email`=?, `rank`=?, `money`=?, `level`=? WHERE `id`=?', array($_POST['email'], $_POST['rank'], $_POST['money'], $_POST['level'], $member->id));
+            $query = $this->db->execute('UPDATE `<ezrpg>players` SET `email`=?, `rank`=?, `money`=?, `level`=?, `stat_points`=?, `strength`=?, `vitality`=?, `agility`=?, `dexterity`=?, `damage`=?, `kills`=?, `deaths`=? WHERE `id`=?', array($_POST['email'], $_POST['rank'], $_POST['money'], $_POST['level'], $_POST['stat_points'], $_POST['strength'], $_POST['vitality'], $_POST['agility'], $_POST['dexterity'], $_POST['damage'], $_POST['kills'], $_POST['deaths'], $member->id));
             
             $msg = 'You have updated the player\'s info.';
             header('Location: index.php?mod=Members&msg=' . urlencode($msg));
