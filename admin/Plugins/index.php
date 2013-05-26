@@ -36,7 +36,7 @@ class Admin_Plugins extends Base_Module
 					break; //TODO:deactivate plugins but not remove them.
 			}
 		} else {
-		$this->list_modules();
+			$this->list_modules();
 		}
     }
     
@@ -103,38 +103,6 @@ class Admin_Plugins extends Base_Module
 		} else {
 		$this->tpl->display('admin/upload_plugins.tpl');
 		}
-	}
-	private function install_manager() {
-		$results = "Installing DB tables... <br />";
-		$this->db->debug = true;
-		$this->db->execute("CREATE TABLE IF NOT EXISTS `". DB_PREFIX ."plugins` (
-			`id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-			`title` varchar(255) NOT NULL,
-			`description` text NOT NULL,
-			`author` varchar(255) NOT NULL,
-			`authorsite` varchar(255) NOT NULL,
-			`active` tinyint(1) NOT NULL DEFAULT '1',
-			`version` float NOT NULL,
-			`xml_location` text NOT NULL,
-			UNIQUE KEY id (id)
-			) ENGINE=InnoDB  DEFAULT CHARSET=utf8;");
-
-			$query = $this->db->execute('select * from ' . DB_PREFIX . 'plugins where `id` =1');
-			$res = Array();
-		while ($m = $this->db->fetch($query)) {
-			$res[] = $m;
-		}
-		if($res[0]->id == 1) {
-		header('location: index.php?mod=Plugins&act=list');
-		exit;
-		}
-		$this->menu->add_menu('AdminMenu', 'Plugins', 'Plugins', 'Plugin Manager', 'index.php?mod=Plugins');
-		$results .= "Done. <br />Adding Plugin Manager DB<br />";
-		$this->db->execute("insert into ". DB_PREFIX ."plugins (id, title, description, author, active, version, xml_location) values (1, 'ezRPG PluginManager', 'Plugin Manager Beta', 'Tim G', 1, '0.01', '" . CUR_DIR . "/Plugins/plugin.xml')");
-		$results .= "Done. <br />";
-		$results .= "<a href='index.php?mod=Plugins&act=list'>Go To Manager</a>";
-		$this->tpl->assign("RESULTS", $results);
-		$this->tpl->display('admin/plugin_results.tpl');
 	}
 	private function install_ask() {
 	$result = $this->db->fetchRow('SELECT COUNT(id) AS count FROM <ezrpg>plugins');
