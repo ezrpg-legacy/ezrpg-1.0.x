@@ -13,12 +13,14 @@ class Install_Config extends InstallerFactory
 			$dbname = $_POST['dbname'];
 			$dbpass = $_POST['dbpass'];
 			$dbprefix = $_POST['dbprefix'];
+			$dbdriver = $_POST['dbdriver'];
 			$error = 0;
 
 			//test database connection.
+			define("DB_PREFIX", $dbprefix);
 			try
 			{
-				$db = DbFactory::factory('mysql', $dbhost, $dbuser, $dbpass, $dbname);
+				$db = DbFactory::factory($dbdriver, $dbhost, $dbuser, $dbpass, $dbname);
 			}
 			catch (DbException $e)
 			{
@@ -51,7 +53,7 @@ defined('IN_EZRPG') or exit;
 \$config_dbname = '{$dbname}';
 \$config_username = '{$dbuser}';
 \$config_password = '{$dbpass}';
-\$config_driver = 'mysql';
+\$config_driver = '{$dbdriver}';
 
 /*
   Constant:
@@ -95,6 +97,8 @@ CONF;
 		$this->header();
 		echo "<h2>Database Configuration</h2><br />\n";
 		echo '<form method="post">';
+		echo '<label>Driver</label>';
+		echo '<select name="dbdriver"><option value="mysql">MySQL</option><option value="mysqli">MySQLi</option></select>';
 		echo '<label>Host</label>';
 		echo '<input type="text" name="dbhost" value="' . $dbhost . '" />';
 		echo '<label>Database Name</label>';
