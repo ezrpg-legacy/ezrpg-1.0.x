@@ -2,7 +2,7 @@
 define('IN_EZRPG', true);
 
 if (!file_exists('./config.php')) {
-  header('Location: install/index.php');
+	header('Location: install/index.php');
 	exit(1);
 }
 
