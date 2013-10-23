@@ -1,6 +1,7 @@
 <?php
 defined('IN_EZRPG') or exit;
 
+$hooks->add_hook('admin_header', 'online_players');
 $hooks->add_hook('header', 'online_players');
 
 function hook_online_players(&$db, &$tpl, &$player, $args = 0)
