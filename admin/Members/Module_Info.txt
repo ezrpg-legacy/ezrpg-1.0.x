@@ -1,0 +1,4 @@
+:Module Title: Members
+:Module Version: 0.1
+:Module Description: Administration panel that lists all registered members.
+:Module Author: Zeggy 
