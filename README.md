@@ -12,7 +12,7 @@ Contributing to the ezRPG project couldn't be easier!
 4. We will review your changes, and accept them if they fix the problem without causing any problems.
 
 ## Support
-Need some help? Check out the [ezRPG Forums](http://www.makewebgames.com/forumdisplay.php/328-ezRPG and http://www.ugragames.ru/forums/)
+Need some help? Check out the [ezRPG Forums - EN](http://www.makewebgames.com/forumdisplay.php/328-ezRPG), [ezRPG Forums - RU](http://www.ugragames.ru/forums/)
 
 ## Installation
 
