@@ -43,7 +43,7 @@ class Install_CreateAdmin extends InstallerFactory
 				$insert['secret_key'] = $secret_key;
 				$insert['registered'] = time();
 				$insert['rank'] = 10;
-				$db->insert('<ezrpg>players', $insert);
+				$db->insert("players", $insert);
 				$insert = array();
 
 				$this->header();
