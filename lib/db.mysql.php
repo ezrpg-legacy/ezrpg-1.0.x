@@ -379,9 +379,7 @@ class Db_mysql
     {
         if ($this->isConnected === false)
             $this->connect();
-		if(!strpos("<ezrpg>",$table)){
-			$table = DB_PREFIX . $table;
-		}
+
         $table = str_replace('<ezrpg>', DB_PREFIX, $table);
         $query = 'INSERT INTO ' . mysql_real_escape_string($table, $this->db) . ' (';
 		

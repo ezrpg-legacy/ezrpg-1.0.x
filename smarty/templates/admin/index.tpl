@@ -5,6 +5,7 @@
 <h2>Admin Modules</h2>
 <ul>
         <li><a href="index.php?mod=Members">Member Management</a></li>
+        <li><a href="index.php?mod=ModuleList">Module List</a></li>
 </ul>
 
 <p>
