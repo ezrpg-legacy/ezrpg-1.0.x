@@ -8,6 +8,66 @@
 <meta name="Robots" content="index,follow" />
 <link rel="stylesheet" href="../static/default/style.css" type="text/css" />	
 <title>ezRPG :: {$TITLE|default:""}</title>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+		<script>
+			// Wait until the DOM has loaded before querying the document
+			$(document).ready(function(){
+				$('ul.tabs').each(function(){
+					// For each set of tabs, we want to keep track of
+					// which tab is active and it's associated content
+					var $active, $content, $links = $(this).find('a');
+
+					// If the location.hash matches one of the links, use that as the active tab.
+					// If no match is found, use the first link as the initial active tab.
+					$active = $($links.filter('[href="'+location.hash+'"]')[0] || $links[0]);
+					$active.addClass('active');
+					$content = $($active.attr('href'));
+
+					// Hide the remaining content
+					$links.not($active).each(function () {
+						$($(this).attr('href')).hide();
+					});
+
+					// Bind the click event handler
+					$(this).on('click', 'a', function(e){
+						// Make the old tab inactive.
+						$active.removeClass('active');
+						$content.hide();
+
+						// Update the variables with the new link and content
+						$active = $(this);
+						$content = $($(this).attr('href'));
+
+						// Make the tab active.
+						$active.addClass('active');
+						$content.show();
+
+						// Prevent the anchor's default click action
+						e.preventDefault();
+					});
+				});
+			});
+		</script>
+		<style>
+		.tabs li {
+				list-style:none;
+				display:inline;
+			}
+
+			.tabs a {
+				padding:5px 10px;
+				display:inline-block;
+				color:#fff;
+				text-decoration:none;
+			}
+
+			.tabs a.active input{
+				background:#fff;
+				color:#000;
+				border-bottom:5px solid #FF0000;
+			}
+
+		</style>
 </head>
 <body>
 
@@ -21,12 +81,7 @@
 </div>
 
 <div id="nav">
-	<ul>
-	<li><a href="index.php">Admin</a></li>
-	<li><a href="index.php?mod=Members">Members</a></li>
-	<li><a href="../index.php">Back</a></li>
-	<li><a href="../index.php?mod=Logout">Log Out</a></li>
-	</ul>
+ {$TOP_MENU_AdminMenu}
 </div>
 
 <span class="space"></span>

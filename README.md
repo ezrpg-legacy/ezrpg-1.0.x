@@ -1,6 +1,32 @@
+<<<<<<< HEAD
+ezRPG 1.0.4 zeggy 
+=================
+version 1.0.4 assembly of modules from the author engine
+
+1. The Banking module.
+2. The mining control module.
+3. The module of job vacancies.
+4. Module fighting with bots with admin panel.
+5. The library is created class of objects, sorted by types of items as well as items module.
+
+This assembly of modules enables the user to:
+- Engaged in resource extraction;
+- To get a job to earn money;
+- To invest their savings in the bank;
+- To participate in the battles to earn experience points to improve;
+- Create objects (weapons, potions, etc.)
+
 ezRPG 1.0.3
 ===========
+=======
+ezRPG : Development Stage Branch
 
+Warning, this branch is a testing branch to test new ideas before pushing to Master. If you're new to ezRPG,
+stay with the Master branch instead. 
+
+=====
+
+>>>>>>> refs/remotes/origin/development
 A modular game engine written in PHP.
 
 ## Contribute

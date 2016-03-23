@@ -11,8 +11,8 @@ class Install_Populate extends InstallerFactory
 		{
 			$e->__toString();
 		}
-		
-		$query1 = <<<QUERY
+
+		$structure1 = <<<QUERY
 CREATE TABLE IF NOT EXISTS `<ezrpg>players` (
   `id` int(11) unsigned NOT NULL auto_increment,
   `username` varchar(30) default NULL,
@@ -24,6 +24,7 @@ CREATE TABLE IF NOT EXISTS `<ezrpg>players` (
   `last_active` int(11) unsigned default '0',
   `last_login` int(11) unsigned default '0',
   `money` int(11) unsigned default '100',
+  `bank` int(11) unsigned default '0',
   `level` int(11) unsigned default '1',
   `stat_points` int(11) unsigned default '10',
   `exp` int(11) unsigned default '0',
@@ -44,9 +45,9 @@ CREATE TABLE IF NOT EXISTS `<ezrpg>players` (
   UNIQUE KEY `email` (`email`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
 QUERY;
-        $db->execute($query1);
+        $db->execute($structure1);
             
-        $query2 = <<<QUERY
+        $structure2 = <<<QUERY
 CREATE TABLE IF NOT EXISTS `<ezrpg>player_log` (
   `id` int(11) unsigned NOT NULL auto_increment,
   `player` int(11) unsigned NOT NULL,
@@ -58,10 +59,58 @@ CREATE TABLE IF NOT EXISTS `<ezrpg>player_log` (
   KEY `new_logs` (`player`,`status`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 QUERY;
-		$db->execute($query2);
-		$this->header();
+	$db->execute($structure2);
+
+		$structure3 = <<<QUERY
+CREATE TABLE IF NOT EXISTS `<ezrpg>menu` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `active` int(11) NOT NULL,
+  `parent_id` int(11) NOT NULL DEFAULT '0',
+  `name` varchar(255) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `AltTitle` varchar(255) DEFAULT NULL,
+  `uri` varchar(255) NOT NULL,
+  `pos` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
+QUERY;
+	$db->execute($structure3);
+
+	$structure4 = <<<QUERY
+  CREATE TABLE IF NOT EXISTS `<ezrpg>plugins` (
+			`id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+			`title` varchar(255) NOT NULL,
+			`description` text NOT NULL,
+			`author` varchar(255) NOT NULL,
+			`authorsite` varchar(255) NOT NULL,
+			`active` tinyint(1) NOT NULL DEFAULT '1',
+			`version` float NOT NULL,
+			`xml_location` text NOT NULL,
+			UNIQUE KEY id (id)
+			) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+QUERY;
+	
+	$db->execute($structure4);
+
+	$data1 = <<<QUERY
+INSERT INTO `<ezrpg>menu` (`id`, `parent_id`, `name`, `title`, `AltTitle`, `uri`, `pos`, `active`) VALUES
+(1, 0, 'UserMenu', 'User Menu',NULL, '', 0, 1),
+(2, 1, 'EventLog', 'Event Log',NULL, 'index.php?mod=EventLog', 0, 1),
+(3, 1, 'City', 'City',NULL, 'index.php?mod=City', 1, 1),
+(4, 1, 'Members', 'Members',NULL, 'index.php?mod=Members', 2, 1),
+(5, 1, 'Account', 'Account',NULL, 'index.php?mod=AccountSettings', 3, 1),
+(6, 0, 'WorldMenu', 'World Menu',NULL, '', 0, 1),
+(7, 6, 'Members', 'Members',NULL, 'index.php?mod=Members', 0, 1),
+(8, 0, 'AdminMenu', 'Admin Menu',NULL, '', 0, 1),
+(9, 8, 'Members', 'Members','Member Management', 'index.php?mod=Members', 0, 1),
+(10, 8, 'Menus', 'Menus', 'Menu Management', 'index.php?mod=Menu', 0, 1),
+(11, 8, 'Plugins', 'Plugins', 'Plugin Management', 'index.php?mod=Plugins', 0, 1);
+QUERY;
+
+	$db->execute($data1);
+	$this->header();
 		echo "<h2>The database has been populated.</h2>\n";
-		echo "<a href=\"index.php?step=CreateAdmin\">Continue to next step</a>";
+		echo "<a href=\"index.php?step=Zeggy\">Continue to next step</a>";
 		$this->footer();
 	}
 }

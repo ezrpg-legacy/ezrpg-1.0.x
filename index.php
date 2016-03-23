@@ -2,7 +2,7 @@
 define('IN_EZRPG', true);
 
 if (!file_exists('./config.php')) {
-  header('Location: install/index.php');
+	header('Location: install/index.php');
 	exit(1);
 }
 
@@ -16,7 +16,7 @@ $module_name = ( (isset($_GET['mod']) && ctype_alnum($_GET['mod'])) ? $_GET['mod
 $module_name = $hooks->run_hooks('header', $module_name);
 
 //Begin module
-$module = ModuleFactory::factory($db, $tpl, $player, $module_name);
+$module = ModuleFactory::factory($db, $tpl, $player, $module_name, $menu);
 $module->start();
 
 //Footer hooks
