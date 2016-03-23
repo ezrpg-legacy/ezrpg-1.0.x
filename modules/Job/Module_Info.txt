@@ -10,5 +10,10 @@ Extract the folders/files in /ezrpg into the root folder of your ezRPG installat
 Edit city.tpl to add a link to the bank with the URL index.php?mod=Job
 
 =========================
+
+This module is distributed under the GPL v3 license:
+http://www.gnu.org/licenses/gpl.html
+
+=========================
 Thanks for downloading!
 Zeggy

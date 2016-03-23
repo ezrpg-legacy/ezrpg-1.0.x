@@ -1,4 +1,4 @@
 :Module Title: Module List
-:Module Version: 0.1
+:Module Version: 1.0.1
 :Module Description: Administration panel that lists all installed modules
 :Module Author: Marcus "Waizujin" Krueger

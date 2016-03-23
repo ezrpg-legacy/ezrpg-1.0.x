@@ -14,18 +14,29 @@
 <div id="wrapper">
 
 <div id="header">
-	<span id="title">ezRPG</span>
+	<span id="title">ezRPG 1.0.3</span>
 	<span id="time">{$smarty.now|date_format:'%A %T'}
 	<br />
 	<strong>Players Online</strong>: {$ONLINE}</span>
 </div>
 
 <div id="nav">
+	<ul>
 	{if $LOGGED_IN == 'TRUE'}
-	{$TOP_MENU_UserMenu}
-	{else}
-	{$TOP_MENU_LOGGEDOUT}
+	<li><a href="index.php">Home</a></li>
+	<li><a href="index.php?mod=EventLog">Log</a></li>
+	<li><a href="index.php?mod=City">City</a></li>
+	<li><a href="index.php?mod=Members">Members</a></li>
+	<li><a href="index.php?mod=AccountSettings">Account</a></li>
+	{if $player->rank >= 5}
+	<li><a href="admin/index.php">Admin</a></li>
 	{/if}
+	<li><a href="index.php?mod=Logout">Log Out</a></li>
+	{else}
+	<li><a href="index.php">Home</a></li>
+	<li><a href="index.php?mod=Register">Register</a></li>
+	{/if}
+	</ul>
 </div>
 
 <span class="space"></span>

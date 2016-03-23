@@ -33,5 +33,10 @@ Delete the following folders and files:
 /smarty/templates/admin/botbattle*.tpl
 
 =========================
+
+This module is distributed under the GPL v3 license:
+http://www.gnu.org/licenses/gpl.html
+
+=========================
 Thanks for downloading!
 Zeggy

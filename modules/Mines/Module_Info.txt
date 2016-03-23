@@ -34,6 +34,10 @@ Use minerals as resources for other modules.
 
 Please feel free to create derivative modules from this one, or to expand this module!
 
+
+This module is distributed under the GPL v3 license:
+http://www.gnu.org/licenses/gpl.html
+
 =========================
 Thanks for downloading!
 Zeggy

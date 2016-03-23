@@ -20,8 +20,20 @@ class Module_Index extends Base_Module
         }
         else
         {
-            $this->tpl->display('index.tpl');
+           $this->totalPlayers();            
+           $this->tpl->display('index.tpl');
         }
+    
     }
+       private function totalPlayers()
+       {
+        $query = $this->db->fetchRow('SELECT COUNT(`id`) AS `count` FROM `<ezrpg>players`');
+        $total_players = $query->count;
+       
+        $this->tpl->assign('playercount', $total_players); 
+        
+       }
+
+   
 }
 ?>

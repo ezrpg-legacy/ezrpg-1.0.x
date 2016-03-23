@@ -5,7 +5,6 @@
 <div class="left">
 
 <h3>Player</h3>
-<<<<<<< HEAD
 <p>
 <a href="index.php">Home</a><br />
 <a href="index.php?mod=EventLog">Event Log</a><br />
@@ -32,21 +31,6 @@ Forum<br />
 Battle<br />
 Item Shop<br />
 </p>
-=======
-{$MENU_UserMenu}
-
-</div>
-<div class="right">
-
-<h3>World</h3>
-{$MENU_WorldMenu}
-
-
-<h3>City</h3>
-
-{$MENU_City}
-
->>>>>>> refs/remotes/origin/development
 
 </div>
 

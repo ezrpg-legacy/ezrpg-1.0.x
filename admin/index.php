@@ -19,7 +19,7 @@ $module_name = ( (isset($_GET['mod']) && ctype_alnum($_GET['mod'])) ? $_GET['mod
 $module_name = $hooks->run_hooks('admin_header', $module_name);
 
 //Begin module
-$module = ModuleFactory::adminFactory($db, $tpl, $player, $module_name, $menu);
+$module = ModuleFactory::adminFactory($db, $tpl, $player, $module_name);
 $module->start();
 
 //Admin footer hook

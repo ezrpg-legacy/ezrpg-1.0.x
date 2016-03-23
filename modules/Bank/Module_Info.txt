@@ -19,6 +19,10 @@ Visit index.php?mod=Bank&act=uninstall to uninstall the bank mod.
 Remove the link to the bank mod from city.tpl.
 
 Delete the modules/Bank folder and the smarty/templates/bank.tpl file.
+=========================
+
+This module is distributed under the GPL v3 license:
+http://www.gnu.org/licenses/gpl.html
 
 =========================
 Thanks for downloading!

@@ -18,16 +18,6 @@ This assembly of modules enables the user to:
 
 ezRPG 1.0.3
 ===========
-=======
-ezRPG : Development Stage Branch
-
-Warning, this branch is a testing branch to test new ideas before pushing to Master. If you're new to ezRPG,
-stay with the Master branch instead. 
-
-=====
-
->>>>>>> refs/remotes/origin/development
-A modular game engine written in PHP.
 
 ## Contribute
 Contributing to the ezRPG project couldn't be easier!

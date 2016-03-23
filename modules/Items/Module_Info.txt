@@ -13,6 +13,10 @@ How do I add a new item class?
  Create a class that extends BaseItem. See the existing item classes for an example. 
  The item class must have the useItem, useType and getDescription methods implemented.
  After the class is created, include it at the bottom of lib/class.items.php
+=========================
+
+This module is distributed under the GPL v3 license:
+http://www.gnu.org/licenses/gpl.html
 
 =========================
 Thanks for downloading!

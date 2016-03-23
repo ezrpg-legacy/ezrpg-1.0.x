@@ -26,13 +26,6 @@ abstract class Base_Module
     */
     protected $player;
     
-  /*
-	  Variable: $menu
-	  The menu class
-	*/
-	
-	protected $menu;
-	
     /*
       Function: __construct
       The constructor the every module. Saves the database, template and player variables as class variables.
@@ -44,12 +37,11 @@ abstract class Base_Module
       $tpl - A smarty object.
       $player - A player result set from the database, or 0 if not logged in.
     */
-    public function __construct(&$db, &$tpl, &$player = 0, &$menu)
+    public function __construct(&$db, &$tpl, &$player = 0)
     {
         $this->db = $db;
         $this->tpl = $tpl;
         $this->player = $player;
-		$this->menu = $menu;
     }
 }
 ?>
