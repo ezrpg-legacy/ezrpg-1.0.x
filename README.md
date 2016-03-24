@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 ezRPG 1.0.4 zeggy 
 =================
 version 1.0.4 assembly of modules from the author engine
@@ -32,7 +31,7 @@ Need some help? Check out the [ezRPG Forums - EN](http://www.makewebgames.com/fo
 
 ## Installation
 
-1. [Download latest version of ezRPG 1.0.3](https://github.com/EdwardBlack13/ezrpg-1.0.x.git).
+1. [Download latest version of ezRPG](https://github.com/EdwardBlack13/ezrpg-1.0.x.git).
 2. Visit yourgame.com/docs/index.html in your browser to read the documentation of the engine.
 3. Give read/write permission to:
   * config.php
