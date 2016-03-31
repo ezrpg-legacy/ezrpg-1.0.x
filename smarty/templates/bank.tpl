@@ -6,8 +6,9 @@
   Welcome, <strong>{$player->username}</strong>!
   <br />
   You have <strong>{$player->bank}</strong> money in your bank!
+<br /><br />
+<a href="index.php?mod=City">to return to the city...</a>
 </p>
-
 <div class="left">
   <h2>Deposit</h2>
   <form method="post" action="index.php?mod=Bank&act=deposit">

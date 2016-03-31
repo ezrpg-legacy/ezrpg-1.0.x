@@ -1,4 +1,12 @@
-ezRPG 1.0.4 zeggy 
+ezRPG 1.0.5 JesterC 
+=================
+1. Added module Attack (game pad) while one-sided model is implemented (you attack and your opponent learns about it only after updating their pages), a developer JesterC;
+2. Added module Mailbox, in-game mail, a developer JesterC;
+3. Added module test Items (admin panel), the creation and editing of objects;
+4. Updated module is Members (admin panel), added BAN users;
+5. Update admin panel.
+
+ezRPG 1.0.4 zeggy
 =================
 version 1.0.4 assembly of modules from the author engine
 

@@ -1,13 +1,13 @@
-{include file="header.tpl" TITLE="Bot Battle"}
+{include file="header.tpl" TITLE="Results"}
 
-<h1>Battle!</h1>
+<h3>Результат</h3>
 
 <p>
-{$battle}
+{$amsg}
 </p>
 
 <p>
-<li><a href="index.php?mod=BotBattle">the batlle?</a></li>
+<li><a href="index.php?mod=Attack">the batlle?</a></li>
 <li><a href="index.php?mod=Hospital">to heal or regain energy?</a></li>
 <li><a href="index.php?mod=City">to return to the city...</a></li>
 </p>

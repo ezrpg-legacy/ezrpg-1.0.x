@@ -40,6 +40,7 @@ CREATE TABLE IF NOT EXISTS `<ezrpg>players` (
   `damage` int(11) unsigned default '0',
   `kills` int(11) unsigned NOT NULL default '0',
   `deaths` int(11) unsigned NOT NULL default '0',
+  `ban` int(11) unsigned default '0',
   PRIMARY KEY  (`id`),
   UNIQUE KEY `username` (`username`),
   UNIQUE KEY `email` (`email`)
@@ -62,7 +63,7 @@ QUERY;
 		$db->execute($query2);
 		$this->header();
 		echo "<h2>The database has been populated.</h2>\n";
-                echo "<a href=\"index.php?step=Zeggy\">Continue to next step</a>";
+                echo "<a href=\"index.php?step=Zeggy_JesterC\">Continue to next step</a>";
 		$this->footer();
 	}
 }

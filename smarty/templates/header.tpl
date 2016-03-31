@@ -14,7 +14,7 @@
 <div id="wrapper">
 
 <div id="header">
-	<span id="title">ezRPG 1.0.3</span>
+	<span id="title">ezRPG 1.0.5-jesterc</span>
 	<span id="time">{$smarty.now|date_format:'%A %T'}
 	<br />
 	<strong>Players Online</strong>: {$ONLINE}</span>

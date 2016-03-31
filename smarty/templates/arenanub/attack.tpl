@@ -1,4 +1,4 @@
-{include file="header.tpl" TITLE="Bot Battle"}
+{include file="header.tpl" TITLE="Battle"}
 
 <p>
 Click on an opponent to battle!
@@ -10,10 +10,10 @@ Click on an opponent to battle!
     <th style="text-align: left;">Level</th>
   </tr>
 
-{foreach from=$bots item=bot}
+{foreach from=$opponents item=opponent}
   <tr>
-    <td><a href="index.php?mod=BotBattle&act=battle&id={$bot->id}">{$bot->name}</a></td>
-    <td>{$bot->level}</td>
+    <td><a href="index.php?mod=Attack&act=go&id={$opponent->id}">{$opponent->username}</a></td>
+    <td>{$opponent->level}</td>
   </tr>
 {/foreach}
 </table>

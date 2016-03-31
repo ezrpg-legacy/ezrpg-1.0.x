@@ -1,16 +1,23 @@
 {include file="admin/header.tpl" TITLE="Admin"}
 
-<h1>Admin</h1>
+<h1>Admin Modules</h1>
+<p>This is a list of modules that add or modify the Admin Panel.</p>
+<table width="100%" style="font-size: 100%;">
+	<tr>
+		<th style="text-align: left;">Name</th>
+                                           <th style="text-align: left;">Version</th>
+		<th style="text-align: left;">Description</th>
+		<th style="text-align: left;">Author</th>
+	</tr>
+	{foreach from=$adminModules key=module item=m}
+		<tr>
+			<td>{$m.name}</td>
+                                                                <td>{$m.ver}</td>
+			<td>{$m.desc}</td>
+			<td>{$m.author}</td>
+		</tr>
+	{/foreach}
+</table>
 
-<h2>Admin Modules</h2>
-<ul>
-        <li><a href="index.php?mod=Members">Member Management</a></li>
-        <li><a href="index.php?mod=BotBattle">BotBattle</a></li>
-        <li><a href="index.php?mod=ModuleList">Module List</a></li>
-</ul>
-
-<p>
-If you install extra admin modules, edit <em>smarty/templates/admin/index.tpl</em> to add links above.
-</p>
-
+<br />
 {include file="admin/footer.tpl"}

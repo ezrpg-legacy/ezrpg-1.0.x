@@ -11,5 +11,7 @@ Welcome to the Job agency! What kind of work do you want to do?
 <li><a href="index.php?mod=Job&work=2">{$work_agility}</a></li>
 <li><a href="index.php?mod=Job&work=3">{$work_dexterity}</a></li>
 </ul>
-
+<p>
+<li><a href="index.php?mod=City">to return to the city...</a></li>
+</p>
 {include file="footer.tpl"}

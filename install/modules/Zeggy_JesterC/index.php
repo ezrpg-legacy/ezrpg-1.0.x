@@ -1,5 +1,5 @@
 <?php
-class Install_Zeggy extends InstallerFactory
+class Install_Zeggy_JesterC extends InstallerFactory
 {
 	function start(){
 		require_once "../config.php";
@@ -56,9 +56,22 @@ INDEX (  `player` )
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
 QUERY;
     $db->execute($query3);
+    
+    $query4 = <<<QUERY
+CREATE TABLE IF NOT EXISTS `<ezrpg>mail` (
+`id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+`to` VARCHAR( 50 ) NOT NULL ,
+`from` VARCHAR( 50 ) NOT NULL ,
+`subject` VARCHAR( 45 ) NOT NULL ,
+`date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+`isread` INT( 1 ) NOT NULL ,
+`message` VARCHAR( 5000 ) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+QUERY;
+		$db->execute($query4);    
         
 		$this->header();
-		echo "<h2>The database has been zeggy.</h2>\n";
+		echo "<h2>The database has been zeggy_jesterc.</h2>\n";
 		echo "<a href=\"index.php?step=CreateAdmin\">Continue to next step</a>";
 		$this->footer();
 	}
