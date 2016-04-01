@@ -15,8 +15,8 @@
 <h3>World</h3>
 <p>
 <a href="index.php?mod=Members">Members List</a><br />
-Top Players<br />
-Game Statistics<br />
+<a href="index.php?mod=TopPlayers">Top 10 Players</a><br />
+<a href="index.php?mod=GameStatistics">Game Statistics</a><br />
 Forum<br />
 </p>
 </div>
@@ -27,6 +27,7 @@ Forum<br />
 <a href="index.php?mod=Bank">Bank</a><br />
 <a href="index.php?mod=Mines">Mines</a><br />
 <a href="index.php?mod=Job">Job</a><br />
+<a href="index.php?mod=Hospital">Hospital</a><br />
 <a href="index.php?mod=BotBattle">BotBattle</a><br />
 <a href="index.php?mod=Attack">Battle</a><br />
 Item Shop<br />
