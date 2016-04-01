@@ -1,5 +1,5 @@
 <?php
-class Install_Zeggy_JesterC extends InstallerFactory
+class Install_ZeggyJesterC extends InstallerFactory
 {
 	function start(){
 		require_once "../config.php";
@@ -59,7 +59,7 @@ QUERY;
     
     $query4 = <<<QUERY
 CREATE TABLE IF NOT EXISTS `<ezrpg>mail` (
-`id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+`id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY ,
 `to` VARCHAR( 50 ) NOT NULL ,
 `from` VARCHAR( 50 ) NOT NULL ,
 `subject` VARCHAR( 45 ) NOT NULL ,
@@ -71,7 +71,7 @@ QUERY;
 		$db->execute($query4);    
         
 		$this->header();
-		echo "<h2>The database has been zeggy_jesterc.</h2>\n";
+		echo "<h2>The database has been ZeggyJesterc.</h2>\n";
 		echo "<a href=\"index.php?step=CreateAdmin\">Continue to next step</a>";
 		$this->footer();
 	}

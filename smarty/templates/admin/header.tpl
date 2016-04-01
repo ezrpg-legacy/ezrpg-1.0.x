@@ -25,7 +25,7 @@
 	<li><a href="index.php">AdminMod</a></li>
         <li><a href="index.php?mod=ModuleList">GameMod</a></li>
 	<li><a href="index.php?mod=Members">Members</a></li>
-        <li><a href="http://ugragames.ru/103/docs/index.html" target="_blank">Docs</a></li>
+        <li><a href="http://ugragames.ru/105j/docs/index.html" target="_blank">Docs</a></li>
 	<li><a href="../index.php">Back</a></li>
 	<li><a href="../index.php?mod=Logout">Log Out</a></li>
 	</ul>

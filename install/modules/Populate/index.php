@@ -63,7 +63,7 @@ QUERY;
 		$db->execute($query2);
 		$this->header();
 		echo "<h2>The database has been populated.</h2>\n";
-                echo "<a href=\"index.php?step=Zeggy_JesterC\">Continue to next step</a>";
+                echo "<a href=\"index.php?step=ZeggyJesterC\">Continue to next step</a>";
 		$this->footer();
 	}
 }
