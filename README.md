@@ -1,3 +1,11 @@
+ezRPG 1.0.6 tREMor 
+=================
+1.Added module TopPlayers, a developer tREMor;
+2.Added module Hospital2, a developer tREMor;
+3.Added module GameStatistics, a developer Hedge;
+4.Upgrade InstallModules for encoding -utf8 for further localization engine;
+5.Update admin panel, added to the list of developers.
+
 ezRPG 1.0.5 JesterC 
 =================
 1. Added module Attack (game pad) while one-sided model is implemented (you attack and your opponent learns about it only after updating their pages), a developer JesterC;
