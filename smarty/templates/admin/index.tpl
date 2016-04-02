@@ -20,4 +20,41 @@
 </table>
 
 <br />
+<p><B>
+Community development engine ezRPG.</B>
+</p>
+
+<p>
+<B>
+author ezRPG engine:
+</B>
+Zeggy
+</p>
+<p><B>
+developers version "1.0.x -" engine:</B>
+Zeggy - Sweden?;
+Booher - Germany;
+Uaktags - Tim Garrity;
+EdwardBlack - Edward Babikov, Russia;  
+</p>
+<p>
+<B>
+developers modules version "1.0.x -" engine:
+</B>
+Zeggy - Sweden?;
+Booher - Germany;
+Uaktags - Tim Garrity;
+JesterC;
+tREMor;
+Hedge - New Zealand;
+21Lockdown;
+Waizujin - Marcus Krueger;
+EdwardBlack - Edward Babikov, Russia;
+</p>
+<p>
+<B>
+test version "1.0.3 - 1.0.6" engine:
+</B>
+EdwardBlack - Edward Babikov, Russia;
+</p>
 {include file="admin/footer.tpl"}
