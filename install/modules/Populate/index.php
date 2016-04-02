@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS `<ezrpg>players` (
   PRIMARY KEY  (`id`),
   UNIQUE KEY `username` (`username`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 QUERY;
         $db->execute($query1);
             
@@ -58,7 +58,7 @@ CREATE TABLE IF NOT EXISTS `<ezrpg>player_log` (
   PRIMARY KEY  (`id`),
   KEY `player_log` (`player`,`time`),
   KEY `new_logs` (`player`,`status`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 QUERY;
 		$db->execute($query2);
 		$this->header();

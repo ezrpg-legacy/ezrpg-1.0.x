@@ -3,7 +3,7 @@
 <head>
 <meta name="Description" content="ezRPG Project, the free, open source browser-based game engine!" />
 <meta name="Keywords" content="ezrpg, game, game engine, pbbg, browser game, browser games, rpg, ezrpg project" />
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta name="Distribution" content="Global" />
 <meta name="Robots" content="index,follow" />
 <link rel="stylesheet" href="../static/default/style.css" type="text/css" />	

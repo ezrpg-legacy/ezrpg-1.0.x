@@ -22,7 +22,7 @@ CREATE TABLE  `<ezrpg>mines` (
   `diamonds` INT UNSIGNED NOT NULL DEFAULT  '0',
   PRIMARY KEY  (`id`),
   UNIQUE (`player`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 QUERY;
         $db->execute($query1);
     
@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `<ezrpg>bots` (
   `money` int(11) unsigned NOT NULL,
   PRIMARY KEY  (`id`),
   KEY `level` (`level`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 QUERY;
 		$db->execute($query2);
     
@@ -53,7 +53,7 @@ CREATE TABLE IF NOT EXISTS `<ezrpg>items` (
 `value4` INT NOT NULL ,
 `value5` INT NOT NULL ,
 INDEX (  `player` )
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 QUERY;
     $db->execute($query3);
     
@@ -66,7 +66,7 @@ CREATE TABLE IF NOT EXISTS `<ezrpg>mail` (
 `date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
 `isread` INT( 1 ) NOT NULL ,
 `message` VARCHAR( 5000 ) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 QUERY;
 		$db->execute($query4);    
         
