@@ -8,6 +8,23 @@
 <meta name="Robots" content="index,follow" />
 <link rel="stylesheet" href="static/default/style.css" type="text/css" />	
 <title>ezRPG :: {$TITLE|default:""}</title>
+<script language="javascript" type="text/javascript">
+    
+       window.setInterval("zeitanzeige()",1000);
+ 
+       function zeitanzeige()
+       {
+        d = new Date ();
+ 
+        h = (d.getHours () < 10 ? '0' + d.getHours () : d.getHours ());
+        m = (d.getMinutes () < 10 ? '0' + d.getMinutes () : d.getMinutes ());
+        s = (d.getSeconds () < 10 ? '0' + d.getSeconds () : d.getSeconds ());
+ 
+        document.getElementById("zeit").innerHTML =  
+        h + ':' + m + ':' + s ;
+       }
+    </script>
+
 </head>
 <body>
 
@@ -15,7 +32,7 @@
 
 <div id="header">
 	<span id="title">ezRPG 1.0.6-tREMor</span>
-	<span id="time">{$smarty.now|date_format:'%A %T'}
+	<span id="time">{$smarty.now|date_format:'%A'}<span id="zeit"></span>
 	<br />
 	<strong>Players Online</strong>: {$ONLINE}</span>
 </div>
