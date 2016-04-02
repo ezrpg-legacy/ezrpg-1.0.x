@@ -5,4 +5,4 @@
 :
 :Module Version: 1.0.1
 :Module Description: ezRPGGame, game statistics module.
-:Module Author: 
+:Module Author: Hedge 

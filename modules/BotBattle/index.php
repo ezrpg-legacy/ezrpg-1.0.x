@@ -99,7 +99,7 @@ class Module_BotBattle extends Base_Module
         }
         
         $this->tpl->assign('battle', $battle);
-        $this->tpl->display('botbattle_results.tpl');
+        $this->tpl->display('botbattle/botbattle_results.tpl');
     }
     
     private function listBots()
@@ -113,7 +113,7 @@ class Module_BotBattle extends Base_Module
         }
         
         $this->tpl->assign('bots', $bots);
-        $this->tpl->display('botbattle.tpl');
+        $this->tpl->display('botbattle/botbattle.tpl');
     }
     
     private function install()
