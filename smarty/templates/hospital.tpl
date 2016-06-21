@@ -1,27 +1,24 @@
 {include file="header.tpl" TITLE="Hospital"}
-<!-- HOSPITAL WITH ADRENALINE TEMPLATE BY TREMOR (freepwn.com) -->
 
-<h1>The Hospital</h1>
-
-<p>To completely heal yourself, you need to pay at the rate of <u>1 coin for 1 point</u> of health.
-</p>
-
-<p>To restore energy, you need to pay at the rate of <u>1 coin for 1 point</u> of energy.
-</p>
-
-<center>
-
-{$hospital}
-
+<h1>{$LANGUAGE_Healer}</h1>
+{$LANGUAGE_Welcome} <strong>{$player->username}</strong>!
+  <br />
+{$LANGUAGE_You_have_cash} <strong>{$player->money}</strong> {$LANGUAGE_coins_and} <strong>{$player->bank}</strong> {$LANGUAGE_money_in_your_bank}!<br>
 <br>
-<form method="POST" action="index.php?mod=Hospital">
-<input type="submit" name="submit" value="Heal Me">
-<input type="submit" name="submit" value="Adrenaline Shot">
+{$LANGUAGE_Complete_your_treatment_will_cost}<b>{round($player->max_hp-$player->hp)}</b>{$LANGUAGE_coins}.
+ 
+<form method="POST" action="index.php?mod=Hospital&act=heal">
+<input type="text" name="amount" autocomplete="off" value="{round($player->max_hp-$player->hp)}" />
+<input type="submit" value="{$LANGUAGE_heal_me}" />
 </form>
 
-</center>
-<p>
-<li><a href="index.php?mod=City">to return to the city...</a></li>
-</p>
+<br> 
+{$LANGUAGE_An_injection_of_adrenaline_will_cost}<b>{round($player->max_energy-$player->energy)}</b>{$LANGUAGE_coins}.
+
+<form method="POST" action="index.php?mod=Hospital&act=adrenaline">
+<input type="text" name="amount" autocomplete="off" value="{round($player->max_energy-$player->energy)}" />
+<input type="submit" value="{$LANGUAGE_adrenaline_shot}" />
+</form>
+
 
 {include file="footer.tpl"}

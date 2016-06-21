@@ -1,0 +1,4 @@
+:Module Title: Forum
+:Module Version: 1.0.1
+:Module Description: ezRPGGame, List edit, delete and add topic forum.
+:Module Author: djpredator69

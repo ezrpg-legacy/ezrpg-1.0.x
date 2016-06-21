@@ -39,14 +39,14 @@ class Module_Bank extends Base_Module
         if ($amount < 0 || $amount > $this->player->bank)
         {
             //No query, just error message
-            $msg = 'You cannot withdraw that amount!';
+            $msg = $_SESSION['You_cannot_withdraw_that_amount'];
         }
         else
         {
             //Update player database
             $query = $this->db->execute('UPDATE `<ezrpg>players` SET `money`=?, `bank`=? WHERE `id`=?', array($this->player->money + $amount, $this->player->bank - $amount, $this->player->id));
             
-            $msg = 'You have withdrawn ' . $amount . ' money!';
+            $msg = $_SESSION['You_have_withdrawn'] . $amount . $_SESSION['money'];
         }
         
         //Redirect back to main bank page, including the message
@@ -67,14 +67,14 @@ class Module_Bank extends Base_Module
         if ($amount < 0 || $amount > $this->player->money)
         {
             //No query, just error message
-            $msg = 'You cannot deposit that amount!';
+            $msg = $_SESSION['You_cannot_deposit_that_amount'];
         }
         else
         {
             //Update player database
             $query = $this->db->execute('UPDATE `<ezrpg>players` SET `money`=?, `bank`=? WHERE `id`=?', array($this->player->money - $amount, $this->player->bank + $amount, $this->player->id));
             
-            $msg = 'You have deposited ' . $amount . ' money!';
+            $msg = $_SESSION['You_have_deposited'] . $amount . $_SESSION['money'];
         }
         
         //Redirect back to main bank page, including the message

@@ -68,7 +68,8 @@ class Module_Items extends Base_Module
     private function install()
     {
         requireAdmin($this->player);
-
+        
+        $table_prefix = DB_PREFIX;
         $create_table = <<<SQL
 CREATE TABLE IF NOT EXISTS `<ezrpg>items` (
 `id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY ,

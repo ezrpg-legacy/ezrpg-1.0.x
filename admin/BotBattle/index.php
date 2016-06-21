@@ -34,7 +34,7 @@ class Admin_BotBattle extends Base_Module
         $this->tpl->assign('botcount', $total_bots);
         $this->tpl->assign('bots', $bots);
         
-        $this->tpl->display('admin/botbattle/botbattle.tpl');
+        $this->tpl->display('admin/botbattle.tpl');
     }
     
     private function addBot()
@@ -78,7 +78,7 @@ class Admin_BotBattle extends Base_Module
             }
         }
         
-        $this->tpl->display('admin/botbattle/botbattle_add.tpl');
+        $this->tpl->display('admin/botbattle_add.tpl');
     }
     
     private function editBot()
@@ -100,7 +100,7 @@ class Admin_BotBattle extends Base_Module
         if (!isset($_POST['edit']))
         {
             $this->tpl->assign('bot', $bot);
-            $this->tpl->display('admin/botbattle/botbattle_edit.tpl');
+            $this->tpl->display('admin/botbattle_edit.tpl');
             exit;
         }
         
@@ -156,7 +156,7 @@ class Admin_BotBattle extends Base_Module
         if (!isset($_POST['confirm']))
         {
             $this->tpl->assign('bot', $bot);
-            $this->tpl->display('admin/botbattle/botbattle_delete.tpl');
+            $this->tpl->display('admin/botbattle_delete.tpl');
             exit;
         }
         else

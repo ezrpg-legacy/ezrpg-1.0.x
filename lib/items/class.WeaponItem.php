@@ -55,6 +55,7 @@ class WeaponItem extends BaseItem
 
     public function getDescription()
     {
+      /*       
         $desc = 'Status: <strong>';
         if ($this->value5 == 0)
         {
@@ -65,23 +66,24 @@ class WeaponItem extends BaseItem
             $desc .= 'Equipped';
         }
         $desc .= '</strong>';
-
+      */
+        
         //Show weapon stat bonuses
         if ($this->value1 > 0)
         {
-            $desc .= '<br />Strength: <strong>+' . $this->value1 . '</strong>';
+            $desc .= 'Strength: <strong>+' . $this->value1 . '</strong><br />';
         }
         if ($this->value2 > 0)
         {
-            $desc .= '<br />Agility: <strong>+' . $this->value2 . '</strong>';
+            $desc .= 'Agility: <strong>+' . $this->value2 . '</strong><br />';
         }
         if ($this->value3 > 0)
         {
-            $desc .= '<br />Dexterity: <strong>+' . $this->value3 . '</strong>';
+            $desc .= 'Dexterity: <strong>+' . $this->value3 . '</strong><br />';
         }
         if ($this->value4 > 0)
         {
-            $desc .= '<br />Damage: <strong>+' . $this->value4 . '</strong>';
+            $desc .= 'Damage: <strong>+' . $this->value4 . '</strong><br />';
         }
         return $desc;
     }

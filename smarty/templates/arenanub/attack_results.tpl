@@ -1,14 +1,14 @@
 {include file="header.tpl" TITLE="Results"}
 
-<h3>Результат</h3>
+<h1>{$LANGUAGE_Batlle_log}</h1>
 
 <p>
 {$amsg}
 </p>
 
-<p>
-<li><a href="index.php?mod=Attack">the batlle?</a></li>
-<li><a href="index.php?mod=Hospital">to heal or regain energy?</a></li>
-<li><a href="index.php?mod=City">to return to the city...</a></li>
-</p>
+<ul>
+    <li><a href="index.php?mod=Attack">{$LANGUAGE_the_batlle}</a></li>
+    <li><a href="index.php?mod=Hospital">{$LANGUAGE_To_be_treated}</a></li>
+    <li><a href="index.php?mod=City">{$LANGUAGE_Return}</a></li>
+</ul>
 {include file="footer.tpl"}

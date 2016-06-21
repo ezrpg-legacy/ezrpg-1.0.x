@@ -72,7 +72,7 @@ QUERY;
         
 		$this->header();
 		echo "<h2>The database has been ZeggyJesterc.</h2>\n";
-		echo "<a href=\"index.php?step=CreateAdmin\">Continue to next step</a>";
+		echo "<a href=\"index.php?step=ForumLang\">Continue to next step</a>";
 		$this->footer();
 	}
 }

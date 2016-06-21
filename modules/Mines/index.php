@@ -73,13 +73,13 @@ class Module_Mines extends Base_Module
                 $insert['player'] = $this->player->id;
                 $this->db->insert('<ezrpg>mines', $insert);
 
-                $msg = 'You have bought a mining license and your first mine!';
+                $msg = $_SESSION['You_have_bought_a_mining_license_and_your_first_mine'];
                 header('Location: index.php?mod=Mines&msg=' . urlencode($msg));
                 exit;
             }
             else
             {
-                $msg = 'You don\'t have enough money to buy a mining license!';
+                $msg = $_SESSION['You_do_not_have_enough_money_to_buy_a_mining_license'];
                 header('Location: index.php?mod=Mines&msg=' . urlencode($msg));
                 exit;
             }
@@ -97,7 +97,7 @@ class Module_Mines extends Base_Module
         
         if ($mines == false)
         {
-            $msg = 'You need to buy a mining license first!';
+            $msg = $_SESSION['You_need_to_buy_a_mining_license_first'];
             header('Location: index.php?mod=Mines&msg=' . urlencode($msg));
             exit;
         }
@@ -117,25 +117,25 @@ class Module_Mines extends Base_Module
         {
             if ($price_money > $this->player->money)
             {
-                $msg = 'You don\'t have enough money to buy a new mine!';
+                $msg = $_SESSION['You_do_not_have_enough_money_to_buy_a_new mine'];
                 header('Location: index.php?mod=Mines&act=buy&msg=' . urlencode($msg));
                 exit;
             }
             else if ($price_rocks > $mines->rocks)
             {
-                $msg = 'You don\'t have enough rocks to buy a new mine!';
+                $msg = $_SESSION['You_do_not_have_enough_rocks_to_buy_a_new_mine'];
                 header('Location: index.php?mod=Mines&act=buy&msg=' . urlencode($msg));
                 exit;
             }
             else if ($price_copper > $mines->copper)
             {
-                $msg = 'You don\'t have enough copper to buy a new mine!';
+                $msg = $_SESSION['You_do_not_have_enough_copper_to_buy_a_new_mine'];
                 header('Location: index.php?mod=Mines&act=buy&msg=' . urlencode($msg));
                 exit;
             }
             else if ($price_diamonds > $mines->diamonds)
             {
-                $msg = 'You don\'t have enough diamonds to buy a new mine!';
+                $msg = $_SESSION['You_do_not_have_enough_diamonds_to_buy_a_new mine'];
                 header('Location: index.php?mod=Mines&act=buy&msg=' . urlencode($msg));
                 exit;
             }
@@ -145,7 +145,7 @@ class Module_Mines extends Base_Module
                 $this->db->execute('UPDATE `<ezrpg>players` SET `money`=money-? WHERE `id`=?', array(intval($price_money), $this->player->id));
                 $this->db->execute('UPDATE `<ezrpg>mines` SET `rocks`=rocks-?, `copper`=copper-?, `diamonds`=diamonds-?, `mines`=mines+1 WHERE `id`=?', array($price_rocks, $price_copper, $price_diamonds, $mines->id));
 
-                $msg = 'You have bought a new mine!';
+                $msg = $_SESSION['You_have_bought_a_new_mine'];
                 header('Location: index.php?mod=Mines&act=buy&msg=' . urlencode($msg));
                 exit;
             }
@@ -164,7 +164,7 @@ class Module_Mines extends Base_Module
 
         if ($mines == false)
         {
-            $msg = 'You need to buy a mining license first!';
+            $msg = $_SESSION['You_need_to_buy_a_mining_license_first'];
             header('Location: index.php?mod=Mines&msg=' . urlencode($msg));
             exit;
         }
@@ -181,17 +181,17 @@ class Module_Mines extends Base_Module
             if ($rocks > $mines->rocks)
             {
                 $errors = 1;
-                $msg .= 'You don\'t have that many rocks!<br />';
+                $msg .= $_SESSION['You_do_not_have_many_rocks'];
             }
             if ($copper > $mines->copper)
             {
                 $errors = 1;
-                $msg .= 'You don\'t have that much copper!<br />';
+                $msg .= $_SESSION['You_do_not_have_much_copper'];
             }
             if ($diamonds > $mines->diamonds)
             {
                 $errors = 1;
-                $msg .= 'You don\'t have that many diamonds!<br />';
+                $msg .= $_SESSION['You_do_not_have_many_diamonds'];
             }
 
             if ($errors == 1)
@@ -205,7 +205,7 @@ class Module_Mines extends Base_Module
                 $this->db->execute('UPDATE `<ezrpg>players` SET `money`=money+? WHERE `id`=?', array(intval($gain), $this->player->id));
                 $this->db->execute('UPDATE `<ezrpg>mines` SET `rocks`=rocks-?, `copper`=copper-?, `diamonds`=diamonds-? WHERE `id`=?', array($rocks, $copper, $diamonds, $mines->id));
 
-                $msg = 'You have sold your minerals for <strong>' . $gain . '</strong> money!';
+                $msg = $_SESSION['You_have_sold_your_minerals_for'] . $gain . $_SESSION['money'];
                 header('Location: index.php?mod=Mines&act=market&msg=' . urlencode($msg));
                 exit;
             }
@@ -224,14 +224,14 @@ class Module_Mines extends Base_Module
 
         if ($mines == false)
         {
-            $msg = 'You need to buy a mining license first!';
+            $msg = $_SESSION['You_need_to_buy_a_mining_license_first'];
             header('Location: index.php?mod=Mines&msg=' . urlencode($msg));
             exit;
         }
 
         if ($this->player->energy < 1)
         {
-            $msg = 'You don\'t have enough energy to mine!';
+            $msg = $_SESSION['You_do_not_have_enough_energy_to_mine'];
             header('Location: index.php?mod=Mines&msg=' . urlencode($msg));
             exit;
         }

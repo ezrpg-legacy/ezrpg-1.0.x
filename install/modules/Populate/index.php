@@ -41,6 +41,10 @@ CREATE TABLE IF NOT EXISTS `<ezrpg>players` (
   `kills` int(11) unsigned NOT NULL default '0',
   `deaths` int(11) unsigned NOT NULL default '0',
   `ban` int(11) unsigned default '0',
+  `race` int(11) unsigned DEFAULT '0',
+  `ban_forum` int(11) unsigned DEFAULT '0',
+  `lang` varchar(30) NOT NULL DEFAULT 'english',
+  `sex` varchar(8) NOT NULL DEFAULT 'male',
   PRIMARY KEY  (`id`),
   UNIQUE KEY `username` (`username`),
   UNIQUE KEY `email` (`email`)

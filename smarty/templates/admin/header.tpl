@@ -3,7 +3,7 @@
 <head>
 <meta name="Description" content="ezRPG Project, the free, open source browser-based game engine!" />
 <meta name="Keywords" content="ezrpg, game, game engine, pbbg, browser game, browser games, rpg, ezrpg project" />
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <meta name="Distribution" content="Global" />
 <meta name="Robots" content="index,follow" />
 <link rel="stylesheet" href="../static/default/style.css" type="text/css" />	
@@ -25,7 +25,7 @@
 	<li><a href="index.php">AdminMod</a></li>
         <li><a href="index.php?mod=ModuleList">GameMod</a></li>
 	<li><a href="index.php?mod=Members">Members</a></li>
-        <li><a href="http://ugragames.ru/105j/docs/index.html" target="_blank">Docs</a></li>
+        <li><a href="http://ugragames.ru/104z/docs/index.html" target="_blank">Docs</a></li>
 	<li><a href="../index.php">Back</a></li>
 	<li><a href="../index.php?mod=Logout">Log Out</a></li>
 	</ul>

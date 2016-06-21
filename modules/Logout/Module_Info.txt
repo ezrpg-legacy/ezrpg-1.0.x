@@ -1,4 +1,4 @@
 :Module Title: Logout
 :Module Version: 1.0.1
-:Module Description: ezRPGCore
+:Module Description: ezRPGCore, player of the game output
 :Module Author: Zeggy 

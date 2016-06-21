@@ -1,3 +1,11 @@
+ezRPG 1.0.7 lang 
+=================
+1.Added module 50x50, a developer JesterC;
+2.Added module BlackJack, a developer tREMor;
+3.Added module Forum, a developer DJPredator;
+4.Upgrade InstallModules for further localization engine;
+5.System added localization for: English, German and Russian language.
+
 ezRPG 1.0.6 tREMor 
 =================
 1.Added module TopPlayers, a developer tREMor;

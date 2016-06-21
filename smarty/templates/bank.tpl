@@ -1,32 +1,29 @@
 {include file="header.tpl" TITLE="Bank"}
 
-<h1>Bank</h1>
+<h1>{$LANGUAGE_Bank}</h1>
 
 <p>
-  Welcome, <strong>{$player->username}</strong>!
+  {$LANGUAGE_Welcome} <strong>{$player->username}</strong>!
   <br />
-  You have <strong>{$player->bank}</strong> money in your bank!
-<br /><br />
-<a href="index.php?mod=City">to return to the city...</a>
+  {$LANGUAGE_You_have} <strong>{$player->bank}</strong> {$LANGUAGE_money_in_your_bank}!
 </p>
+
 <div class="left">
-  <h2>Deposit</h2>
-  <form method="post" action="index.php?mod=Bank&act=deposit">
-  <label>Amount to Deposit</label>
+ <form method="post" action="index.php?mod=Bank&act=deposit">
+  <label>{$LANGUAGE_Amount_to_Deposit}</label>
   <input type="text" name="amount" autocomplete="off" value="{$player->money}" />
   <br />
-  <input type="submit" value="Deposit" />
+  <input type="submit" value="{$LANGUAGE_Deposit}" />
   </form>
 </div>
 
 
 <div class="right">
-  <h2>Withdraw</h2>
   <form method="post" action="index.php?mod=Bank&act=withdraw">
-  <label>Amount to Withdraw</label>
+  <label>{$LANGUAGE_Amount_to_Withdraw}</label>
   <input type="text" name="amount" autocomplete="off" value="{$player->bank}" />
   <br />
-  <input type="submit" value="Withdraw" />
+  <input type="submit" value="{$LANGUAGE_Withdraw}" />
   </form>
 </div>
 

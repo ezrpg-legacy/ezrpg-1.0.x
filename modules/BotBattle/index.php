@@ -40,14 +40,14 @@ class Module_BotBattle extends Base_Module
         
         if ($this->player->energy == 0)
         {
-            $msg = 'You do not have enough energy for a battle!';
+            $msg = $_SESSION['You_do_not_have_enough_energy_for_a_battle'];
             header('Location: index.php?mod=BotBattle&msg=' . urlencode($msg));
             exit;
         }
         
         if ($this->player->hp == 0)
         {
-            $msg = 'You must be alive to fight!';
+            $msg = $_SESSION['You_must_be_alive_to_fight'];
             header('Location: index.php?mod=BotBattle&msg=' . urlencode($msg));
             exit;
         }
@@ -99,7 +99,7 @@ class Module_BotBattle extends Base_Module
         }
         
         $this->tpl->assign('battle', $battle);
-        $this->tpl->display('botbattle/botbattle_results.tpl');
+        $this->tpl->display('arenanub/botbattle_results.tpl');
     }
     
     private function listBots()
@@ -113,7 +113,7 @@ class Module_BotBattle extends Base_Module
         }
         
         $this->tpl->assign('bots', $bots);
-        $this->tpl->display('botbattle/botbattle.tpl');
+        $this->tpl->display('arenanub/botbattle.tpl');
     }
     
     private function install()

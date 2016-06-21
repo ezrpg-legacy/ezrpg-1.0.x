@@ -1,13 +1,13 @@
 {include file="header.tpl" TITLE="Top 10 Players"} 
    
- <h2>Top 10 Players</h2> 
+<h2>{$LANGUAGE_Top_10_Players}</h2> 
    
  <table width="90%"> 
    <tr> 
-     <th style="text-align: left;">Username</th> 
-     <th style="text-align: left;"><a href="index.php?mod=TopPlayers&order=level">Level</a></th> 
-     <th style="text-align: left;"><a href="index.php?mod=TopPlayers&order=money">Money</a></th>
-     <th style="text-align: left;"><a href="index.php?mod=TopPlayers&order=bank">Bank</a></th> 
+     <th style="text-align: left;">{$LANGUAGE_Username}</th> 
+     <th style="text-align: left;"><a href="index.php?mod=TopPlayers&order=level">{$LANGUAGE_Level}</a></th> 
+     <th style="text-align: left;"><a href="index.php?mod=TopPlayers&order=money">{$LANGUAGE_money}</a></th>
+     <th style="text-align: left;"><a href="index.php?mod=TopPlayers&order=bank">{$LANGUAGE_bank}</a></th> 
    </tr> 
    
  {foreach from=$members item=member} 

@@ -21,11 +21,17 @@
       <a href="index.php?mod=Members&act=edit&id={$member->id}"><strong>Edit</strong></a> | 
       <a href="index.php?mod=Members&act=delete&id={$member->id}"><strong>Delete</strong></a> |
       {if $member->ban == 0}
-      <a href="index.php?mod=Members&act=ban&id={$member->id}"><strong>Ban</strong></a> |
+      <a href="index.php?mod=Members&act=ban&id={$member->id}"><strong>Ban</strong></a> 
       {else}
-      <a href="index.php?mod=Members&act=unban&id={$member->id}"><strong>UnBan</strong></a> |
+      <a href="index.php?mod=Members&act=unban&id={$member->id}"><strong>UnBan</strong></a> 
       {/if}
-      
+    </td>
+    <td>
+      {if $member->ban_forum == 0}
+      <a href="index.php?mod=Members&act=ban_forum&id={$member->id}"><strong>BanForum</strong></a> 
+      {else}
+      <a href="index.php?mod=Members&act=unban_forum&id={$member->id}"><strong>UnBanForum</strong></a> 
+      {/if}
     </td>
   </tr>
 {/foreach}

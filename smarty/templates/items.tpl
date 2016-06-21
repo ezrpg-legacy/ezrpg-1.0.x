@@ -1,24 +1,19 @@
 {include file="header.tpl" TITLE="Items"}
 
-<h1>Your Items</h1>
-
-<table width="90%">
+<h3>Your Items</h3>
+<table width="90%" border=2>
   <tr>
     <th style="text-align: left;"><u>Name</u></th>
+    <th style="text-align: left;"><u>Description</u></th>
     <th style="text-align: left;"><u>Action</u></th>
   </tr>
-
 {foreach from=$items item=item}
   <tr>
     <td><strong>{$item->getName()}</strong></td>
+    <td>{$item->getDescription()}</td>
     <td><a href="index.php?mod=Items&act=use&id={$item->id}">{$item->useType()}</a></td>
-  </tr>
-  <tr>
-    <td colspan="2">
-        {$item->getDescription()}
-        <span class="space"></span>
-    </td>
-  </tr>
+
+</tr>
 {/foreach}
 </table>
 

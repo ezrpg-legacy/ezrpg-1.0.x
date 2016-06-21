@@ -1,13 +1,14 @@
 {include file="header.tpl" TITLE="Bot Battle"}
 
+<h1>{$LANGUAGE_Arena}</h1>
 <p>
-Click on an opponent to battle!
+{$LANGUAGE_Click_on_an_opponent_to_battle}
 </p>
 
 <table width="90%">
   <tr>
-    <th style="text-align: left;">Name</th>
-    <th style="text-align: left;">Level</th>
+    <th style="text-align: left;">{$LANGUAGE_Name}</th>
+    <th style="text-align: left;">{$LANGUAGE_Level}</th>
   </tr>
 
 {foreach from=$bots item=bot}
@@ -17,8 +18,8 @@ Click on an opponent to battle!
   </tr>
 {/foreach}
 </table>
-<p>
-<li><a href="index.php?mod=Hospital">to heal or regain energy?</a></li>
-<li><a href="index.php?mod=City">to return to the city...</a></li>
-</p>
+<ul>
+    <li><a href="index.php?mod=City">{$LANGUAGE_Return}</a></li>
+</ul>
+
 {include file="footer.tpl"}
