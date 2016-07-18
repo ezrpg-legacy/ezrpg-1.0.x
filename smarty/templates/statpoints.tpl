@@ -1,43 +1,30 @@
 {include file="header.tpl" TITLE="Stat Points"}
 
-<h1>Stat Points</h1>
+<h1>{$LANGUAGE_Stat_Points}</h1>
 
 <p>
-Here you can use your stat points to increase your stats! You have <strong>{$player->stat_points}</strong> points to use!
+{$LANGUAGE_Here_you_can_use_your_stat_points_to_increase_your_stats_You_have} <strong>{$player->stat_points}</strong> {$LANGUAGE_points_to_use}
 <br /><br />
-You receive stat points when you first sign up to the game, and also each time when you level up!
+{$LANGUAGE_You_receive_stat_points_when_you_first_sign_up_to_the_game_and_also_each_time_when_you_level_up}
 </p>
-
 <form method="post" action="index.php?mod=StatPoints">
 <input type="submit" class="button" name="stat" value="Strength" />
 </form>
-
-<p>
-<strong>Strength</strong> - This increases the damage you do in battle, and increases your weight limit so you can carry more items.
-</p>
+<strong>{$LANGUAGE_Strength}</strong> {$LANGUAGE_This_increases_the_damage_you_do_in_battle_and_increases_your_weight_limit_so_you_can_carry_more_items}
 
 <form method="post" action="index.php?mod=StatPoints">
 <input type="submit" class="button" name="stat" value="Vitality" />
 </form>
-
-<p>
-<strong>Vitality</strong> - This increases the amount of health you have and decreases the amount of damage you receive in battle.
-</p>
+<strong>{$LANGUAGE_Vitality}</strong> {$LANGUAGE_This_increases_the_amount_of_health_you_have_and_decreases_the_amount_of_damage_you_receive_in_battle}
 
 <form method="post" action="index.php?mod=StatPoints">
 <input type="submit" class="button" name="stat" value="Agility" />
 </form>
-
-<p>
-<strong>Agility</strong> - This increases your chance to completely dodge and attack and take no damage in battle!
-</p>
+<strong>{$LANGUAGE_Agility}</strong> {$LANGUAGE_This_increases_your_chance_to_completely_dodge_and_attack_and_take_no_damage_in_battle}
 
 <form method="post" action="index.php?mod=StatPoints">
 <input type="submit" class="button" name="stat" value="Dexterity" />
 </form>
-
-<p>
-<strong>Dexterity</strong> - This helps you aim better so you are less likely to miss your opponent.
-</p>
+<strong>{$LANGUAGE_Dexterity}</strong> {$LANGUAGE_This_helps_you_aim_better_so_you_are_less_likely_to_miss_your_opponent}
 
 {include file="footer.tpl"}

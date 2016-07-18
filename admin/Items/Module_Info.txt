@@ -1,0 +1,4 @@
+:Module Title: Items
+:Module Version: 1.0.1
+:Module Description: ezRPGCore, List add, edit and delete all Items
+:Module Author: Edward(edwardblack)Babikov

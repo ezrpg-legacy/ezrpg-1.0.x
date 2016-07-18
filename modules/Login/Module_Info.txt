@@ -1,4 +1,4 @@
 :Module Title: Login
 :Module Version: 1.0.1
-:Module Description: ezRPGCore
+:Module Description: ezRPGCore, authorization Player
 :Module Author: Zeggy 

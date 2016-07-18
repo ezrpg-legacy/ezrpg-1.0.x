@@ -1,4 +1,8 @@
 :Module Title: Members
-:Module Version: 0.1
-:Module Description: ezRPGCore, Administration panel that lists all registered members.
-:Module Author: Zeggy 
+:Module Version: 1.0.2 update
+:Module Description: ezRPGCore, List edit, delete and ban all registered users.
+:Module Author: Edward(edwardblack)Babikov 
+:
+:Module Version: 1.0.1
+:Module Description: ezRPGCore, List edit and delete all registered users.
+:Module Author: Zeggy

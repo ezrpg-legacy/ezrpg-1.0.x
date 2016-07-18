@@ -2,7 +2,7 @@
 
 {if $logs}
 	<form method="post" action="index.php?mod=EventLog&act=clear">
-	<input type="submit" value="Clear Messages" />
+	<input type="submit" value="{$LANGUAGE_Clear_Messages}" />
 	</form>
 
 	<span class="space"></span>
@@ -21,7 +21,7 @@
 	{/foreach}
 {else}
 	<p>
-	<strong>You have no log messages!</strong>
+	<strong>{$LANGUAGE_You_have_no_log_messages}</strong>
 	</p>
 {/if}
 
