@@ -23,6 +23,26 @@ class Admin_Members extends Base_Module
             {
                 $this->deleteMember();
             }
+            else if ($_GET['act'] == 'ban')
+            {
+                $this->banMember();
+            }
+            else if ($_GET['act'] == 'unban')
+            {
+                $this->unbanMember();
+            }            
+            else if ($_GET['act'] == 'jail')
+            {
+                $this->jailMember();
+            }            
+            else if ($_GET['act'] == 'ban_forum')
+            {
+                $this->ban_forumMember();
+            }
+            else if ($_GET['act'] == 'unban_forum')
+            {
+                $this->unban_forumMember();
+            }
         }
         else
         {
@@ -41,7 +61,7 @@ class Admin_Members extends Base_Module
         else
             $page = 0;
         
-        $query = $this->db->execute('SELECT `id`, `username`, `email` FROM `<ezrpg>players` ORDER BY `id` ASC LIMIT ?,50', array($page * 50));
+        $query = $this->db->execute('SELECT `id`, `username`, `email`, `ban` FROM `<ezrpg>players` ORDER BY `id` ASC LIMIT ?,50', array($page * 50));
         
         $members = Array();
         while ($m = $this->db->fetch($query))
@@ -196,4 +216,169 @@ class Admin_Members extends Base_Module
             exit;
         }
     }
+
+    private function banMember()
+    {
+        $member = $this->db->fetchRow('SELECT `id`, `username` FROM `<ezrpg>players` WHERE `id`=?', array($_GET['id']));
+        
+        if ($member == false)
+        {
+            header('Location: index.php?mod=Members');
+            exit;
+        }
+        
+        if ($member->id == $this->player->id)
+        {
+            //Cannot delete self
+            $msg = 'You cannot ban yourself!';
+            header('Location: index.php?mod=Members&msg=' . urlencode($msg));
+            exit;
+        }
+        
+        if (!isset($_POST['confirm']))
+        {
+            $this->tpl->assign('member', $member);
+            $this->tpl->display('admin/members/members_ban.tpl');
+            exit;
+        }
+        else
+        {
+            $query = $this->db->execute('UPDATE `<ezrpg>players` SET `ban` = 1 WHERE `id`=?', array($member->id));
+            $msg = 'You have ban <strong>' . $member->username . '</strong>.';
+            header('Location: index.php?mod=Members&msg=' . urlencode($msg));
+            exit;
+        }
+    }
+
+    private function unbanMember()
+    {
+        $member = $this->db->fetchRow('SELECT `id`, `username` FROM `<ezrpg>players` WHERE `id`=?', array($_GET['id']));
+        
+        if ($member == false)
+        {
+            header('Location: index.php?mod=Members');
+            exit;
+        }
+        
+        if ($member->id == $this->player->id)
+        {
+            //Cannot delete self
+            $msg = 'You cannot unban yourself!';
+            header('Location: index.php?mod=Members&msg=' . urlencode($msg));
+            exit;
+        }
+        
+        if (!isset($_POST['confirm']))
+        {
+            $this->tpl->assign('member', $member);
+            $this->tpl->display('admin/members/members_unban.tpl');
+            exit;
+        }
+        else
+        {
+            $query = $this->db->execute('UPDATE `<ezrpg>players` SET `ban` = 0 WHERE `id`=?', array($member->id));
+            $msg = 'You have unban <strong>' . $member->username . '</strong>.';
+            header('Location: index.php?mod=Members&msg=' . urlencode($msg));
+            exit;
+        }
+    }
+
+    private function ban_forumMember()
+    {
+        $member = $this->db->fetchRow('SELECT `id`, `username` FROM `<ezrpg>players` WHERE `id`=?', array($_GET['id']));
+        
+        if ($member == false)
+        {
+            header('Location: index.php?mod=Members');
+            exit;
+        }
+        
+        if ($member->id == $this->player->id)
+        {
+            //Cannot delete self
+            $msg = 'You cannot ban_forum yourself!';
+            header('Location: index.php?mod=Members&msg=' . urlencode($msg));
+            exit;
+        }
+        
+        if (!isset($_POST['confirm']))
+        {
+            $this->tpl->assign('member', $member);
+            $this->tpl->display('admin/members/members_ban_forum.tpl');
+            exit;
+        }
+        else
+        {
+            $query = $this->db->execute('UPDATE `<ezrpg>players` SET `ban_forum` = 1 WHERE `id`=?', array($member->id));
+            $msg = 'You have ban_forum <strong>' . $member->username . '</strong>.';
+            header('Location: index.php?mod=Members&msg=' . urlencode($msg));
+            exit;
+        }
+    }
+
+    private function unban_forumMember()
+    {
+        $member = $this->db->fetchRow('SELECT `id`, `username` FROM `<ezrpg>players` WHERE `id`=?', array($_GET['id']));
+        
+        if ($member == false)
+        {
+            header('Location: index.php?mod=Members');
+            exit;
+        }
+        
+        if ($member->id == $this->player->id)
+        {
+            //Cannot delete self
+            $msg = 'You cannot unban_forum yourself!';
+            header('Location: index.php?mod=Members&msg=' . urlencode($msg));
+            exit;
+        }
+        
+        if (!isset($_POST['confirm']))
+        {
+            $this->tpl->assign('member', $member);
+            $this->tpl->display('admin/members/members_unban_forum.tpl');
+            exit;
+        }
+        else
+        {
+            $query = $this->db->execute('UPDATE `<ezrpg>players` SET `ban_forum` = 0 WHERE `id`=?', array($member->id));
+            $msg = 'You have unban_forum <strong>' . $member->username . '</strong>.';
+            header('Location: index.php?mod=Members&msg=' . urlencode($msg));
+            exit;
+        }
+    }
+
+    private function jailMember()
+    {
+        $member = $this->db->fetchRow('SELECT `id`, `username` FROM `<ezrpg>players` WHERE `id`=?', array($_GET['id']));
+        
+        if ($member == false)
+        {
+            header('Location: index.php?mod=Members');
+            exit;
+        }
+        
+        if ($member->id == $this->player->id)
+        {
+            //Cannot delete self
+            $msg = 'You cannot ban yourself!';
+            header('Location: index.php?mod=Members&msg=' . urlencode($msg));
+            exit;
+        }
+        
+        if (!isset($_POST['confirm']))
+        {
+            $this->tpl->assign('member', $member);
+            $this->tpl->display('admin/members/members_jail.tpl');
+            exit;
+        }
+        else
+        {
+            $query = $this->db->execute('UPDATE `<ezrpg>players` SET `ban` = 1 WHERE `id`=?', array($member->id));
+            $msg = 'You have ban <strong>' . $member->username . '</strong>.';
+            header('Location: index.php?mod=Members&msg=' . urlencode($msg));
+            exit;
+        }
+    }       
 }

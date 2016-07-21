@@ -1,0 +1,12 @@
+:Module Title: Hospital
+:Module Version: 1.0.3
+:Module Description: ezRPGGame, module to add health and energy
+:Module Author: edwardblack
+:
+:Module Version: 1.0.2
+:Module Description: ezRPGGame, module to add health and energy
+:Module Author: tREMor
+:
+:Module Version: 1.0.1
+:Module Description: ezRPGGame, module to add health and energy
+:Module Author: Akai

@@ -1,0 +1,4 @@
+:Module Title: BlackJack
+:Module Version: 1.0.1
+:Module Description: ezRPGGame, card game.
+:Module Author: tREMor

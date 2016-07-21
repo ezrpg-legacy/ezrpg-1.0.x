@@ -1,0 +1,19 @@
+:Module Title: Job
+:Module Version: 1.0.1
+:Module Description: ezRPGGame, Job module
+:Module Author: Zeggy
+:
+=========================
+Installation instructions:
+Extract the folders/files in /ezrpg into the root folder of your ezRPG installation.
+
+Edit city.tpl to add a link to the bank with the URL index.php?mod=Job
+
+=========================
+
+This module is distributed under the GPL v3 license:
+http://www.gnu.org/licenses/gpl.html
+
+=========================
+Thanks for downloading!
+Zeggy

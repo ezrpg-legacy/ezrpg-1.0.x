@@ -1,4 +1,8 @@
 :Module Title: AccountSettings
+:Module Version: 1.0.2 update
+:Module Description: ezRPGCore
+:Module Author: Edward(edwardblack)Babikov 
+:
 :Module Version: 1.0.1
 :Module Description: ezRPGCore
-:Module Author: Zeggy 
+:Module Author: Zeggy

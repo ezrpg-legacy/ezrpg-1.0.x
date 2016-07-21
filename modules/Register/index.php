@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 //This file cannot be viewed, it must be included
 defined('IN_EZRPG') or exit;
 
@@ -154,6 +154,8 @@ class Module_Register extends Base_Module
             $insert['secret_key'] = createKey(16);
             $insert['password'] = sha1($insert['secret_key'] . $_POST['password'] . SECRET_KEY);
             $insert['registered'] = time();
+            $insert['sex'] = $_POST['sex'];
+            $insert['lang'] = $_POST['lang'];
 
             global $hooks;
             //Run register hook

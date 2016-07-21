@@ -1,10 +1,15 @@
 {include file="header.tpl" TITLE="Home"}
 
-<h1>Home</h1>
+<h1>Demo version</h1>
 
 <div class="left">
 <p>
-Welcome to ezRPG! Login now!
+Welcome to demo ezRPG engine! Login now!
+<br>
+<br>
+<em> The demo version of the engine 
+<center>looked: <strong>{$playercount}</strong> users. </center> </em>
+
 </p>
 </div>
 
