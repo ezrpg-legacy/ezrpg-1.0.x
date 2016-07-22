@@ -1,0 +1,9 @@
+AddDefaultCharset UTF-8 
+Options All -ExecCGI -Indexes -Includes +FollowSymLinks 
+RewriteEngine On 
+RewriteBase / 
+RewriteCond %{REQUEST_FILENAME} !-d 
+RewriteCond %{REQUEST_FILENAME} !-f 
+RewriteCond %{REQUEST_URI} !\.(css|gif|ico|jpg|js|png)$ 
+RewriteRule ^(.*)$ /index.php/$1 [L] 
+RewriteRule ((%3A|:)25|%0D%0A) - [G]

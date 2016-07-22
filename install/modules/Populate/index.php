@@ -36,13 +36,14 @@ CREATE TABLE IF NOT EXISTS `<ezrpg>players` (
   `vitality` int(11) unsigned default '5',
   `agility` int(11) unsigned default '5',
   `dexterity` int(11) unsigned default '5',
-  `damage` int(11) unsigned default '0',
-  `kills` int(11) unsigned NOT NULL default '0',
-  `deaths` int(11) unsigned NOT NULL default '0',
+  `ban` int(11) unsigned default '0',
+  `ban_forum` int(11) unsigned DEFAULT '0',
+  `lang` varchar(30) NOT NULL DEFAULT 'english',
+  `sex` varchar(8) NOT NULL DEFAULT 'male',
   PRIMARY KEY  (`id`),
   UNIQUE KEY `username` (`username`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 QUERY;
         $db->execute($query1);
             
@@ -56,12 +57,12 @@ CREATE TABLE IF NOT EXISTS `<ezrpg>player_log` (
   PRIMARY KEY  (`id`),
   KEY `player_log` (`player`,`time`),
   KEY `new_logs` (`player`,`status`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 QUERY;
 		$db->execute($query2);
 		$this->header();
 		echo "<h2>The database has been populated.</h2>\n";
-		echo "<a href=\"index.php?step=CreateAdmin\">Continue to next step</a>";
+                echo "<a href=\"index.php?step=ZeggyJesterC\">Continue to next step</a>";
 		$this->footer();
 	}
 }

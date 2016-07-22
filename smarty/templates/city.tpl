@@ -1,34 +1,28 @@
 {include file="header.tpl" TITLE="City"}
 
-<h1>City</h1>
+<h1>{$LANGUAGE_City}</h1>
 
 <div class="left">
 
-<h3>Player</h3>
+<h3>{$LANGUAGE_Player}</h3>
 <p>
-<a href="index.php">Home</a><br />
-<a href="index.php?mod=EventLog">Event Log</a><br />
-Mail Box<br />
-Inventory<br />
-<a href="index.php?mod=AccountSettings">Account Settings</a><br />
+<a href="index.php">{$LANGUAGE_Home}</a><br />
+<a href="index.php?mod=EventLog">{$LANGUAGE_EventLog}</a><br />
+<a href="index.php?mod=AccountSettings">{$LANGUAGE_Account}</a><br />
+<a href="index.php?mod=MailBox">{$LANGUAGE_MailBox}</a><br />
 </p>
-
+<h3>{$LANGUAGE_World}</h3>
+<p>
+<a href="index.php?mod=Members">{$LANGUAGE_MembersList}</a><br />
+<a href="index.php?mod=TopPlayers">{$LANGUAGE_TopPlayers}</a><br />
+<a href="index.php?mod=GameStatistics">{$LANGUAGE_GameStatistics}</a><br />
+<a href="index.php?mod=Forum">{$LANGUAGE_Forum}</a><br />
+</p>
 </div>
 <div class="right">
 
-<h3>World</h3>
+<h3>{$LANGUAGE_City}</h3>
 <p>
-<a href="index.php?mod=Members">Members List</a><br />
-Top Players<br />
-Game Statistics<br />
-Forum<br />
-</p>
-
-
-<h3>City</h3>
-<p>
-Battle<br />
-Item Shop<br />
 </p>
 
 </div>

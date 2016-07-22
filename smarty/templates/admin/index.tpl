@@ -1,15 +1,60 @@
 {include file="admin/header.tpl" TITLE="Admin"}
 
-<h1>Admin</h1>
+<h1>Admin Modules</h1>
+<p>This is a list of modules that add or modify the Admin Panel.</p>
+<table width="100%" style="font-size: 100%;">
+	<tr>
+		<th style="text-align: left;">Name</th>
+                                           <th style="text-align: left;">Version</th>
+		<th style="text-align: left;">Description</th>
+		<th style="text-align: left;">Author</th>
+	</tr>
+	{foreach from=$adminModules key=module item=m}
+		<tr>
+			<td>{$m.name}</td>
+                                                                <td>{$m.ver}</td>
+			<td>{$m.desc}</td>
+			<td>{$m.author}</td>
+		</tr>
+	{/foreach}
+</table>
 
-<h2>Admin Modules</h2>
-<ul>
-        <li><a href="index.php?mod=Members">Member Management</a></li>
-        <li><a href="index.php?mod=ModuleList">Module List</a></li>
-</ul>
-
-<p>
-If you install extra admin modules, edit <em>smarty/templates/admin/index.tpl</em> to add links above.
+<br />
+<p><B>
+Community development engine ezRPG.</B>
 </p>
 
+<p>
+<B>
+author ezRPG engine:
+</B>
+Zeggy
+</p>
+<p><B>
+developers version "1.0.x -" engine:</B>
+Zeggy - Sweden?;
+Booher - Jake Booher, USA;
+UAKTags - Tim Garrity, USA;
+EdwardBlack - Edward Babikov, Russia;  
+</p>
+<p>
+<B>
+developers modules version "1.0.x -" engine:
+</B>
+Zeggy - Sweden?;
+Booher - Jake Booher, USA;
+UAKTags - Tim Garrity, USA;
+JesterC;
+tREMor;
+Hedge;
+21Lockdown;
+Waizujin - Marcus Krueger;
+EdwardBlack - Edward Babikov, Russia;
+</p>
+<p>
+<B>
+test version "1.0.3 - 1.0.6" engine:
+</B>
+EdwardBlack - Edward Babikov, Russia;
+</p>
 {include file="admin/footer.tpl"}
