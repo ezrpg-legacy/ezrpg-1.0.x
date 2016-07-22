@@ -1,4 +1,0 @@
-:Module Title: FiftyFifty(50x50)
-:Module Version: 1.0.1
-:Module Description: ezRPGGame, mini game for money.
-:Module Author: JesterC

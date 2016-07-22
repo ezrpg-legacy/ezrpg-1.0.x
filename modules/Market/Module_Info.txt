@@ -1,8 +1,0 @@
-:Module Title: Market
-:Module Version: 1.0.2.update
-:Module Description: ezRPGGame, Trade between players.
-:Module Author: Edward(edwardblack)Babikov 
-:
-:Module Version: 1.0.1
-:Module Description: ezRPGGame, Trade between players.
-:Module Author: QnshT

@@ -1,7 +1,7 @@
 </div>
 
 <div id="footer">
-	Copyright &copy; 2010 <a href="http://www.ugragames.ru/" target="_blank"><strong>UgraGames</strong></a> | ezRPG Project <a href="http://www.makewebgames.com/forumdisplay.php/328-ezRPG" target="_blank"><strong>EN</a></strong> and <strong><a href="http://www.ugragames.ru/forums/" target="_blank">RU</a></strong>
+	Copyright &copy; 2016 <a href="http://www.yourgame.com/" target="_parent"><strong>Your Game</strong></a> | <a href="http://www.ezrpgproject.net/"><strong>ezRPG Project</strong></a>
 </div>
 
 </div>

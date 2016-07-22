@@ -1,8 +1,0 @@
-:Module Title: Attack
-:Module Version: 1.0.2 update
-:Module Description: ezRPGGame, Battles between players module.
-:Module Author: Edward(edwardblack)Babikov 
-:
-:Module Version: 1.0.1
-:Module Description: ezRPGGame, Battles between players module.
-:Module Author: JesterC
