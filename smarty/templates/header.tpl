@@ -27,13 +27,13 @@
     </script>
 
 </head>
-<body>
+<body onload="time_display()">
 
 <div id="wrapper">
 
 <div id="header">
 	<span id="title">ezRPG 1.0.8</span>
-	<span id="time">{$LANGUAGE_SYS_{$smarty.now|date_format:'%A'}}<span id="time_d"></span>
+	<span id="time">{$LANGUAGE_SYS_{$smarty.now|date_format:'%A'}}<span id="time_d">{$smarty.now|date_format:'%H:%M:%S'}</span>
 	<br />
 	<strong>{$LANGUAGE_SYS_Players_Online}</strong>: {$ONLINE}</span>
 </div>

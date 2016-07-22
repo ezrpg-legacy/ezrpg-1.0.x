@@ -1,9 +1,9 @@
 {include file="admin/header.tpl" TITLE="Members Admin"}
 
-<h3>Пользователи</h3>
+<h3>Members</h3>
 
 <p>
-<strong>Всего пользователей: </strong> {$playercount}
+<strong>Total Members: </strong> {$playercount}
 </p>
 
 <table width="100%">

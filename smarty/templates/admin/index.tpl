@@ -33,8 +33,8 @@ Zeggy
 <p><B>
 developers version "1.0.x -" engine:</B>
 Zeggy - Sweden?;
-Booher - Germany;
-Uaktags - Tim Garrity;
+Booher - Jake Booher, USA;
+UAKTags - Tim Garrity, USA;
 EdwardBlack - Edward Babikov, Russia;  
 </p>
 <p>
@@ -42,11 +42,11 @@ EdwardBlack - Edward Babikov, Russia;
 developers modules version "1.0.x -" engine:
 </B>
 Zeggy - Sweden?;
-Booher - Germany;
-Uaktags - Tim Garrity;
+Booher - Jake Booher, USA;
+UAKTags - Tim Garrity, USA;
 JesterC;
 tREMor;
-Hedge - New Zealand;
+Hedge;
 21Lockdown;
 Waizujin - Marcus Krueger;
 EdwardBlack - Edward Babikov, Russia;
