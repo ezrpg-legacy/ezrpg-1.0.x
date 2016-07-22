@@ -65,7 +65,7 @@ QUERY;
         $data1 = <<<QUERY
 INSERT INTO `<ezrpg>settings` (`id`, `name`, `title`, `description`, `optionscode`, `value`) VALUES
 (1, 'game_name', 'Untitled', 'The title for your game', 'version', '0.0.1'),
-(2, 'core_name', 'ezRPG', 'The title for your core', 'version', '1.0.7 lang'),
+(2, 'core_name', 'ezRPG', 'The title for your core', 'version', '1.0.8'),
 (3, 'english', 'English', NULL, 'language', 'English'),
 (4, 'deutsch', 'Deutsch', NULL, 'language', 'Deutsch'),
 (5, 'russian', 'Russian', NULL, 'language', 'Russian');

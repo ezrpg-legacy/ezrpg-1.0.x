@@ -76,7 +76,7 @@ define('SECRET_KEY', '{$secret_key}');
   DEBUG_MODE - Turn on to show database errors and debug information.
 */
 define('DB_PREFIX', '{$dbprefix}');
-define('VERSION', '1.0.4');
+define('VERSION', '1.0.8');
 define('SHOW_ERRORS', 0);
 define('DEBUG_MODE', 0);
 ?>

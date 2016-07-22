@@ -1,4 +1,4 @@
-ezRPG 1.0.4
+ezRPG 1.0.8
 ===========
 
 A modular game engine written in PHP.
@@ -35,7 +35,7 @@ ezRPG is open-sourced software licensed under the GNU GPL v3 license.
 A copy of the license is included in the distribution of the engine.
 
 ## 3rd Party Modules
-ezRPG 1.0.4 merged with [Edward Black](http://www.makewebgames.com/member/70564-edwardblack)'s [ezRPG 1.0.x fork](https://github.com/EdwardBlack13/ezrpg-1.0.x.git). His compilation included numerous enhancements done by himself and the following others:
+ezRPG 1.0.8 merged with [Edward Black](http://www.makewebgames.com/member/70564-edwardblack)'s [ezRPG 1.0.x fork](https://github.com/EdwardBlack13/ezrpg-1.0.x.git). His compilation included numerous enhancements done by himself and the following others:
 [JesterC](https://ezrpgproject.net/user-14.html)
 [tREMor](https://ezrpgproject.net/user-22.html)
 [Hedge](http://www.makewebgames.com/member/65622-hedge)
